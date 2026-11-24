@@ -1,0 +1,16 @@
+{
+  "id": "922cfac6c19f1d33",
+  "slug": "show-hn-we-replaced-our-time-tracking-saas-with-a-git-repository",
+  "title": "Show HN: We replaced our time tracking SaaS with a Git repository",
+  "url": "https://github.com/clockoli/clockoli",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T12:06:33Z",
+  "description": "TL;DR: - Free and open source, no seat limits. - Some of its features require plans that cost a team of 10 around $1,000&#x2F;year on Clockify or $2,000&#x2F;year on Toggl Track. - No backend. Your time entries live in your private GitHub repo. - Track any URL. - Works offline, syncs in the background and keeps changes in Git history. - Team reports, CSV exports, historical hourly rates, multiple currencies and PDF invoices, all in the browser. Hi HN. I&#x27;m Sergey, one of the developers behind Manticore Search. We&#x27;d been using Clockify for years until they decided to limit their free plan to five users recently. We started looking around. Being an open-source company, we weren&#x27;t particularly excited about paying another monthly fee per employee. But we didn&#x27;t want to self-host a server and a database for what is essentially a stopwatch either. Then we thought: we already use GitHub for most of our work (dev, PM, CRM, CMS). Why not use it for time tracking too? So we built Clockoli. Our whole team (Manticore Search) switched to it about a month ago, and so far it&#x27;s been working well for us. Each team member writes to their own branch. Even if we abandon Clocko",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:29.685322+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

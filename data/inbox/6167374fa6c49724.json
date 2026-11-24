@@ -1,0 +1,16 @@
+{
+  "id": "6167374fa6c49724",
+  "slug": "show-hn-outloud-reader-photograph-a-page-and-listen-to-it-phrase-by-ph",
+  "title": "Show HN: Outloud Reader – photograph a page and listen to it phrase by phrase",
+  "url": "https://outloudreader.app/",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T01:14:07Z",
+  "description": "Hi HN, I built Outloud Reader, an iOS and Android app that reads any page aloud. You take a photo of a page, open a PDF, or paste text, and it reads it aloud in a natural voice, highlighting each phrase as it is spoken. How the idea was born: My wife has been learning English for many years but she never gets real practice. One day she told me it would be great to have an app that could turn any photo of text into audio, so she could practice her listening while walking or driving. That&#x27;s what inspired me to build Outloud Reader. Yes, I know there are many text-to-speech apps, but most of them just read the text or cost too much. What it does: - Every phrase lights up as it&#x27;s spoken, so you can read along - 14 languages, with a woman&#x27;s or a man&#x27;s voice in most of them - If you&#x27;re learning a language, it can translate the page into the language you&#x27;re learning - If you have nothing to listen to, ask AI to write a short text at your level (A1–C2) and turn it into audio - The finished audio is stored on your phone, so it works offline - On iPhone and iPad your library syncs through iCloud, so you can start on your phone and keep listening on your tablet -",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:29.685470+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

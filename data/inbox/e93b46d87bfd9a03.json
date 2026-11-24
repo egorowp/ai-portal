@@ -1,0 +1,16 @@
+{
+  "id": "e93b46d87bfd9a03",
+  "slug": "show-hn-taskless-turn-agents-md-and-pr-comments-into-runnable-checks",
+  "title": "Show HN: Taskless, turn AGENTS.md and PR comments into runnable checks",
+  "url": "https://www.taskless.io/",
+  "source": "Hacker News",
+  "published_at": "2026-11-22T20:11:12Z",
+  "description": "Hey HN, I&#x27;m Jakob, the solo dev and founder behind Taskless. I got tired of my AGENTS.md files being ignored or forgotten a half dozen turns into conversations. I also remembered reading someone here on HN saying we weren&#x27;t using nearly enough syntax trees in our code checks. This is the result. Taskless gives you powerful syntax tree tools with human verifiable fixtures. The CLI is MIT licensed, so running the CLI, onboarding, rule writing, and running the underlying ast-grep &amp; Vale checks are all local. You can give it a try with: npx @taskless&#x2F;cli and then asking your agent to &quot;onboard with Taskless&quot;. Under the hood, the CLI works with your agent to read your PR review comments, fixup commits, and agent files. It takes things that keep recurring and turns them into the simplest code-level enforcement that can prevent the issue going forward. By choosing code over an LLM for the runtime, there&#x27;s no model once code is generated. The checks can then be committed to your codebase and enforced. I&#x27;m particularly proud of how determinism is mixed into the onboarding flow. Any time the CLI can give the agent information without letting the agent wa",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:29.686031+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}
