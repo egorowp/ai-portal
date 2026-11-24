@@ -1,0 +1,16 @@
+{
+  "id": "8a27aeeed7e1a1aa",
+  "slug": "euclid-data-release-1-dr1-learning-machine-learning-investigating-the-",
+  "title": "Euclid Data Release 1 (DR1). Learning machine learning: Investigating the complementarity and biases of strong gravitational lens finding networks on Euclid data",
+  "url": "http://arxiv.org/abs/2611.31231v1",
+  "source": "arXiv",
+  "published_at": "2026-11-23T18:59:05Z",
+  "description": "The Euclid Data Release 1 (DR1) strong lens search presents ECLIPSE, the largest catalogue of strong gravitational lens candidates to date, with >15 000 systems identified across 1900 deg2 of sky. It was constructed using five neural networks applied to approximately 68 million galaxies, followed by citizen science and expert visual inspection. In this work, we compare how the independently developed networks use image information to identify their selection of strong lens candidates. The search combines convolutional neural networks and a vision transformer, using the same pool of data but with different image processing and training choices. We investigate why these networks find different systems and what that means for the completeness of our catalogue. We evaluate all networks on a 50 deg2 calibration set and their application to the full DR1 sample. We find that the networks score candidates very differently, and that combining them recovers over 500 lens candidates within our calibration set at an inspection budget of 2000 objects. On the full DR1 sample, we show that individual networks have distinct biases: some networks favour systems with a larger Einstein radius while o",
+  "tags": [
+    "research",
+    "arXiv"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:16.630489+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

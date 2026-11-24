@@ -1,0 +1,16 @@
+{
+  "id": "db8778653ffa3c16",
+  "slug": "let-vision-language-models-generate-images-through-their-representatio",
+  "title": "Let Vision-Language Models Generate Images through Their Representations",
+  "url": "http://arxiv.org/abs/2611.31237v1",
+  "source": "arXiv",
+  "published_at": "2026-11-23T18:59:32Z",
+  "description": "Recent unified multimodal models aim to combine visual understanding and generation within a single model, yet effectively integrating the two capabilities remains challenging. Leveraging pretrained vision-language models offers a way to build on already learned multimodal knowledge, but making this knowledge effectively accessible to visual generation remains nontrivial. We find that a central challenge lies in the heterogeneous visual representations used for understanding and generation. To address this challenge, we introduce Integral, which converts a pretrained vision-language model into a unified multimodal model by constructing a shared visual representation space across the two capabilities. Integral implements this design through two complementary components. Abstraction Fusion constructs shared visual tokens by aggregating hierarchical representations from the frozen vision encoder, while Block-wise MoT introduces a lightweight generative stream that interacts with the vision-language model only at block boundaries. Our approach effectively preserves the pretrained understanding capability while extending it to strong visual generation. Controlled comparisons further dem",
+  "tags": [
+    "research",
+    "arXiv"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:16.630365+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

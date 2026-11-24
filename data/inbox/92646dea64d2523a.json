@@ -1,0 +1,16 @@
+{
+  "id": "92646dea64d2523a",
+  "slug": "show-hn-netbeans-native-ai-harness-for-enterprise-java",
+  "title": "Show HN: NetBeans-Native AI Harness for Enterprise Java",
+  "url": "https://plugins.netbeans.apache.org/catalogue/?id=141",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T18:10:27Z",
+  "description": "Pure Java, Apache Licensed, Multi Model, Multi Modal Harness with JIT code execution for LLM generated code and JavaFX netbeans integration for the model to generate Swing or JavaFX UIs on-the-fly on the IDEs very own JVM.",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:15.830325+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

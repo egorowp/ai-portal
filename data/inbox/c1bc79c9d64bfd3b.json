@@ -1,0 +1,16 @@
+{
+  "id": "c1bc79c9d64bfd3b",
+  "slug": "how-far-can-linear-go-bipert-a-unified-framework-for-single-cell-pertu",
+  "title": "How Far Can Linear Go? BiPert, a Unified Framework for Single-Cell Perturbation Modelling",
+  "url": "http://arxiv.org/abs/2611.31227v1",
+  "source": "arXiv",
+  "published_at": "2026-11-23T18:58:32Z",
+  "description": "Understanding how genetic perturbations affect cellular behaviour is essential for studying gene function and regulatory mechanisms. Large-scale CRISPR screens measure these effects across thousands of genes, but cover relatively few cellular contexts. Predicting perturbation responses in unseen cell types and identifying perturbed genes from their transcriptional effects therefore remain challenging. Here, we show that both tasks can be addressed through a common linear decomposition of transcriptional responses into shared and perturbation-specific components. Building on this principle, we introduce BiPert, a simple linear framework for both forward perturbation prediction and inverse identification. For forward prediction, BiPert outperforms existing methods that use no external biological knowledge when predicting gene expression changes in unseen cell lines. Its few-shot extension, BiPert-FS, adapts to new cell lines using as few as ten measured perturbations. For inverse identification, BiPert-ID identifies perturbed genes from single-cell expression profiles, outperforming deep-learning methods in unseen cell lines and donors. We further show that perturbations whose effect",
+  "tags": [
+    "research",
+    "arXiv"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:16.630603+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

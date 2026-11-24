@@ -1,0 +1,16 @@
+{
+  "id": "7096f2aac4e06b72",
+  "slug": "zakir0101-llm-l1-v22",
+  "title": "zakir0101/llm-l1-v22",
+  "url": "https://huggingface.co/zakir0101/llm-l1-v22",
+  "source": "Hugging Face",
+  "published_at": "2026-11-24T17:18:25.000Z",
+  "description": "Модель из каталога Hugging Face.",
+  "tags": [
+    "models",
+    "Hugging Face"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:17.397704+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "67b5f0ee004cd2ba",
+  "slug": "show-hn-reverse-specify-anything",
+  "title": "Show HN: Reverse-Specify Anything",
+  "url": "https://github.com/lyriks-io/lyriks-community",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T17:00:00Z",
+  "description": "Hi HN, I&#x27;m Louis, I work at Lyriks. Our team built a tool that reverse specify your software by reading its codebase + all docs your AI client has access to (ie: Jira or Confluence). It writes the spec of what the software does. Each rule and feature links back to the source it comes from. We kept running into the same problem with the teams we work with. Nobody really knows what their software does anymore, especially on old projects. Such as that one legacy soft no one wants to touch anymore... where the spec was written years ago, if even ever written. On top of that, with AI agents writing more and more of the code, it&#x27;s getting worse. It works with any AI client that supports MCP, your favorite LLM, local models included. You get a web UI to browse the spec, so it&#x27;s not just more markdown for you to read. Once it&#x27;s there, it becomes the reference for the whole project. When the code changes it picks up what changed and only updates that part. Your agents can read it and write to it through MCP. Lyriks acts as a central living memory of your projet. It&#x27;s a graph with a deterministic engine that flags gaps and conflicts, same code gives the same result. ",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:15.830556+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}

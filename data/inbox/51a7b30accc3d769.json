@@ -1,0 +1,16 @@
+{
+  "id": "51a7b30accc3d769",
+  "slug": "show-hn-keeping-faces-and-features-consistent-across-24-ai-driven-comi",
+  "title": "Show HN: Keeping faces and features consistent across 24 AI-driven comic pages",
+  "url": "https://joonoo.art/create-comic",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T17:53:53Z",
+  "description": "joonoo.art turns one photo into a comic book (or picture book) starring the people in it. Upload a photo of up to four people, say who&#x27;s who, pick a story or write your own, choose a style, and in under a minute you see the cover and the story. The preview is free with no account. You pay only if you want the full book: starts at $4.99 for a PDF, or about $25 printed before shipping. Hi HN, I&#x27;m Saro, a granddad and CTO (formerly chief architect of Fidelity NetBenefits, and head of engineering at IDEMIA for TSA PreCheck). Reading picture books with my granddaughter last summer, I had the inspiration. I wanted her to be the hero of one. I launched it in August 2025 and got some orders and happy customers, but I held back on promoting it. The hard part was keeping the same face on every page. The models would hallucinate extra fingers or a different child halfway through, and vision models couldn&#x27;t reliably catch it. Testing was almost entirely manual, so every small change took days. What changed in 2026 is that Claude Code got good at writing and running test plans, and its built-in browser can now do much of the visual QA on the artwork. It continues to be challengin",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:26:15.830477+00:00",
+  "generation_error": "HTTP Error 404: Not Found"
+}
