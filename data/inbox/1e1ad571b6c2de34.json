@@ -11,6 +11,6 @@
     "Hugging Face"
   ],
   "status": "review",
-  "created_at": "2026-11-24T20:26:17.397711+00:00",
-  "generation_error": "HTTP Error 404: Not Found"
+  "created_at": "2026-11-24T20:35:58.809235+00:00",
+  "generation_error": "Gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).\",\n    \"status\": \"NOT_FOUND\"\n  }\n}\n"
 }

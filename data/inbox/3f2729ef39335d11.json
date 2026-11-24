@@ -1,0 +1,16 @@
+{
+  "id": "3f2729ef39335d11",
+  "slug": "show-hn-versine-yc-f26-mcp-to-send-and-receive-money",
+  "title": "Show HN: Versine (YC F26) – MCP to send and receive money",
+  "url": "https://news.ycombinator.com/item?id=50634292",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T20:33:12Z",
+  "description": "Hey HN, we’re Harshith, Param, and Vishnu and we&#x27;re building Versine ( https:&#x2F;&#x2F;versine.com ). Versine lets you send and request money just by talking or texting with your AI (think Venmo with an MCP). We’re software engineers who have worked on distributed systems at Stripe, Databricks, and Amazon. Versine is an MCP that sits in front of a wallet with a balance. With it, your agent can do things like: - Send money to someone with your approval (via passkey in our app) - Send and request money to&#x2F;from up to 100 people at once - Send money to people without a Versine account (they cash out to their bank in 2 mins) - Pay people without your explicit approval to trusted contacts (you can set this) Here’s a demo: https:&#x2F;&#x2F;youtube.com&#x2F;shorts&#x2F;Q9X7zioEqi0 We started this because assistants are frustratingly hands-off when it comes to finance and money movement. You can have your assistant go through a receipt and map out all the amounts owed taking care of splitting the subtotal, taxes, tips, but at the end of it the assistant hands back work to you when you have to go out and make the Venmo transfer. Our current solution is oriented towards power use",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:35:58.212942+00:00",
+  "generation_error": "Gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).\",\n    \"status\": \"NOT_FOUND\"\n  }\n}\n"
+}
