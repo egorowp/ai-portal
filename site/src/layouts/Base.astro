@@ -1,0 +1,36 @@
+---
+const { title = 'AI Portal', description = 'Русскоязычный портал об искусственном интеллекте' } = Astro.props;
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#172033;background:#f7f8fb}
+      *{box-sizing:border-box}body{margin:0}a{color:#2457c5;text-decoration:none}
+      header,main,footer{max-width:1080px;margin:auto;padding:24px}
+      header{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #e5e7eb}
+      nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}.brand{font-weight:800;color:#172033}
+      .hero{padding:48px 0}.muted{color:#657087}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+      .card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:20px}
+      .tag{font-size:12px;color:#58657b}.button{display:inline-block;background:#172033;color:white;padding:11px 16px;border-radius:10px}
+      footer{color:#657087;font-size:13px;border-top:1px solid #e5e7eb;margin-top:50px}
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/ai-portal/">AI PORTAL</a>
+      <nav>
+        <a href="/ai-portal/kids/">Детям</a>
+        <a href="/ai-portal/news/">Новости</a>
+        <a href="/ai-portal/pro/">Для специалистов</a>
+        <a href="/ai-portal/library/">Библиотека</a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>AI Portal · Независимый образовательный проект об искусственном интеллекте</footer>
+  </body>
+</html>

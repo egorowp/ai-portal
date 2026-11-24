@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import { articles } from '../../data/articles';
+export function getStaticPaths() {
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+const { article } = Astro.props;
+---
+<Base title={`${article.title} — AI Portal`}>
+  <p class="tag">{article.source} · {(article.tags || []).join(' · ')}</p>
+  <h1>{article.title}</h1>
+  <p class="muted">{article.summary || article.description}</p>
+  <div class="card"><h2>Для школьников</h2><p>{article.content?.kids || 'Версия для школьников ещё не подготовлена.'}</p></div>
+  <div class="card"><h2>Для широкой аудитории</h2><p>{article.content?.general || 'Общая версия ещё не подготовлена.'}</p></div>
+  <div class="card"><h2>Техническая версия</h2><p>{article.content?.pro || 'Техническая версия ещё не подготовлена.'}</p></div>
+  <p><a href={article.url} target="_blank" rel="noopener noreferrer">Открыть первоисточник →</a></p>
+  <p><a href="/ai-portal/news/">← Все новости</a></p>
+</Base>

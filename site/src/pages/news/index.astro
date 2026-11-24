@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import { articles as allArticles } from '../../data/articles';
+const articles = [...allArticles].sort((a, b) => (b.published_at || b.created_at || '').localeCompare(a.published_at || a.created_at || ''));
+---
+<Base title="Новости и практика — AI Portal">
+  <section class="hero"><p class="tag">AI PORTAL / NEWS</p><h1>Новости и практика</h1><p class="muted">Материалы публикуются после редакционной проверки.</p></section>
+  {articles.length ? <div class="grid">{articles.map((article) => <article class="card"><p class="tag">{article.source} · {(article.tags || []).join(' · ')}</p><h2><a href={`/ai-portal/news/${article.slug}/`}>{article.title}</a></h2><p class="muted">{article.summary || article.description || ''}</p><a href={`/ai-portal/news/${article.slug}/`}>Читать →</a></article>)}</div> : <div class="card"><h2>Пока нет опубликованных материалов</h2><p class="muted">Агент собирает материалы в очередь проверки. После редакционного одобрения они появятся здесь.</p></div>}
+</Base>

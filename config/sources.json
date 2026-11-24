@@ -1,0 +1,23 @@
+{
+  "max_items_per_source": 10,
+  "sources": [
+    {
+      "id": "hackernews",
+      "enabled": true
+    },
+    {
+      "id": "arxiv",
+      "enabled": true,
+      "query": "artificial intelligence OR machine learning"
+    },
+    {
+      "id": "github",
+      "enabled": true,
+      "query": "artificial intelligence"
+    },
+    {
+      "id": "huggingface",
+      "enabled": true
+    }
+  ]
+}
