@@ -1,0 +1,17 @@
+{
+  "id": "cbdcedc89ec25141",
+  "slug": "martin-kri-evolving-the-rewards-of-a-learning-agent",
+  "title": "martin-kri/Evolving-the-rewards-of-a-learning-agent",
+  "url": "https://github.com/martin-kri/Evolving-the-rewards-of-a-learning-agent",
+  "source": "GitHub",
+  "published_at": "2026-11-10T14:17:54Z",
+  "description": "Bio-Inspired Artificial Intelligence project: Can Quality-Diversity evolution (MAP-Elites) discover a diverse archive of intrinsic reward functions that significantly improve reinforcement learning sample efficiency compared to hand-crafted rewards?",
+  "tags": [
+    "open-source",
+    "GitHub",
+    "AI"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:38:10.181619+00:00",
+  "generation_error": "The read operation timed out"
+}
