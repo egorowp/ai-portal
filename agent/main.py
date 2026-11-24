@@ -132,8 +132,16 @@ pro: техническая выжимка для разработчиков, о
     req = Request(url, data=json.dumps(payload).encode(), headers={
         "Content-Type": "application/json", "User-Agent": USER_AGENT
     })
-    with urlopen(req, timeout=60) as response:
-        data = json.loads(response.read().decode())
+    try:
+        with urlopen(req, timeout=60) as response:
+            data = json.loads(response.read().decode())
+    except HTTPError as exc:
+        body = ""
+        try:
+            body = exc.read().decode("utf-8", "replace")[:400]
+        except Exception:
+            pass
+        raise RuntimeError(f"Gemini API HTTP {exc.code}: {body}") from exc
     text = data["candidates"][0]["content"]["parts"][0]["text"]
     return json.loads(text)
 
@@ -145,6 +153,7 @@ def save_json(folder: Path, name: str, data):
 
 
 def main():
+    print(f"GEMINI_API_KEY set: {bool(os.getenv('GEMINI_API_KEY'))}")
     limit = int(os.getenv("MAX_ITEMS_PER_SOURCE", CONFIG.get("max_items_per_source", 10)))
     collectors = [
         ("hackernews", collect_hn),
