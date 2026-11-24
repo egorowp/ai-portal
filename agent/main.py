@@ -113,6 +113,7 @@ def collect_huggingface(limit):
 def gemini_generate(source_item):
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
+        print("[WARN] generation skipped: GEMINI_API_KEY is not set")
         return None
     model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     prompt = f"""
@@ -136,12 +137,8 @@ pro: техническая выжимка для разработчиков, о
         with urlopen(req, timeout=60) as response:
             data = json.loads(response.read().decode())
     except HTTPError as exc:
-        body = ""
-        try:
-            body = exc.read().decode("utf-8", "replace")[:400]
-        except Exception:
-            pass
-        raise RuntimeError(f"Gemini API HTTP {exc.code}: {body}") from exc
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Gemini HTTP {exc.code}: {body[:400]}") from exc
     text = data["candidates"][0]["content"]["parts"][0]["text"]
     return json.loads(text)
 
@@ -154,6 +151,7 @@ def save_json(folder: Path, name: str, data):
 
 def main():
     print(f"GEMINI_API_KEY set: {bool(os.getenv('GEMINI_API_KEY'))}")
+    print(f"GEMINI_MODEL: {os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')}")
     limit = int(os.getenv("MAX_ITEMS_PER_SOURCE", CONFIG.get("max_items_per_source", 10)))
     collectors = [
         ("hackernews", collect_hn),
@@ -161,12 +159,13 @@ def main():
         ("github", collect_github),
         ("huggingface", collect_huggingface),
     ]
+    # Дедупликация только по data/news/: записи в inbox считаются необработанными
+    # и получают повторную попытку генерации при каждом запуске.
     existing = set()
-    for folder in (INBOX, NEWS):
-        if folder.exists():
-            for path in folder.glob("*.json"):
-                try: existing.add(json.loads(path.read_text(encoding="utf-8")).get("url"))
-                except Exception: pass
+    if NEWS.exists():
+        for path in NEWS.glob("*.json"):
+            try: existing.add(json.loads(path.read_text(encoding="utf-8")).get("url"))
+            except Exception: pass
 
     collected = []
     for source_id, collector in collectors:
