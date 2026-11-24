@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
@@ -113,15 +114,14 @@ def collect_huggingface(limit):
 def gemini_generate(source_item):
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        print("[WARN] generation skipped: GEMINI_API_KEY is not set")
         return None
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
     prompt = f"""
 Ты редактор русскоязычного образовательного портала об ИИ.
 Подготовь три самостоятельные версии материала по предоставленным метаданным.
 Не добавляй неподтверждённые факты. Если данных недостаточно, прямо обозначь ограничения.
 Верни только JSON с ключами summary, kids, general, pro, tags.
-kids: понятно школьнику 8–14 лет, с аналогией и без опасных инструкций.
+kids: понятно школьнику 8-14 лет, с аналогией и без опасных инструкций.
 general: для широкой аудитории, объясни практическую значимость.
 pro: техническая выжимка для разработчиков, отделяй факты от предположений.
 Сохрани ссылку на первоисточник отдельно, не выдумывай цитаты.
@@ -130,17 +130,34 @@ pro: техническая выжимка для разработчиков, о
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     payload = {"contents": [{"parts": [{"text": prompt}]}],
                "generationConfig": {"responseMimeType": "application/json", "temperature": 0.2}}
-    req = Request(url, data=json.dumps(payload).encode(), headers={
-        "Content-Type": "application/json", "User-Agent": USER_AGENT
-    })
-    try:
-        with urlopen(req, timeout=60) as response:
-            data = json.loads(response.read().decode())
-    except HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Gemini HTTP {exc.code}: {body[:400]}") from exc
-    text = data["candidates"][0]["content"]["parts"][0]["text"]
-    return json.loads(text)
+    last_exc = None
+    for attempt in range(4):
+        try:
+            req = Request(url, data=json.dumps(payload).encode(), headers={
+                "Content-Type": "application/json", "User-Agent": USER_AGENT
+            })
+            with urlopen(req, timeout=120) as response:
+                data = json.loads(response.read().decode())
+            text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            if text.startswith("```"):
+                text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.S)
+            return json.loads(text)
+        except HTTPError as exc:
+            if exc.code not in (429, 503):
+                raise
+            if attempt == 3:
+                raise
+            retry_after = exc.headers.get("Retry-After") or ""
+            wait = int(retry_after) if retry_after.isdigit() else 15 * (attempt + 1)
+            print(f"[RETRY] {source_item['id']}: HTTP {exc.code}, повтор через {wait}s")
+            time.sleep(wait)
+        except TimeoutError:
+            last_exc = exc
+            if attempt == 3:
+                raise
+            print(f"[RETRY] {source_item['id']}: таймаут, повтор через 15s")
+            time.sleep(15)
+    raise last_exc if last_exc else RuntimeError("generation failed")
 
 
 def save_json(folder: Path, name: str, data):
@@ -150,17 +167,14 @@ def save_json(folder: Path, name: str, data):
 
 
 def main():
-    print(f"GEMINI_API_KEY set: {bool(os.getenv('GEMINI_API_KEY'))}")
-    print(f"GEMINI_MODEL: {os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')}")
     limit = int(os.getenv("MAX_ITEMS_PER_SOURCE", CONFIG.get("max_items_per_source", 10)))
+    max_generations = int(os.getenv("MAX_GENERATIONS", "15"))
     collectors = [
         ("hackernews", collect_hn),
         ("arxiv", collect_arxiv),
         ("github", collect_github),
         ("huggingface", collect_huggingface),
     ]
-    # Дедупликация только по data/news/: записи в inbox считаются необработанными
-    # и получают повторную попытку генерации при каждом запуске.
     existing = set()
     if NEWS.exists():
         for path in NEWS.glob("*.json"):
@@ -183,27 +197,37 @@ def main():
 
     new_items = [x for x in collected if x["url"] not in existing]
     print(f"Collected {len(collected)}; new {len(new_items)}")
+    generated = 0
     for source_item in new_items:
+        if generated >= max_generations:
+            remaining = len(new_items) - generated
+            print(f"[SKIP] достигнут лимит {max_generations} генераций на запуск; "
+                  f"{remaining} записей попробуют снова в следующем запуске")
+            break
         try:
-            generated = gemini_generate(source_item)
-            if generated:
-                source_item["summary"] = generated.get("summary", "")
+            generated_raw = gemini_generate(source_item)
+            if generated_raw:
+                source_item["summary"] = generated_raw.get("summary", "")
                 source_item["content"] = {
-                    "kids": generated.get("kids", ""),
-                    "general": generated.get("general", ""),
-                    "pro": generated.get("pro", "")
+                    "kids": generated_raw.get("kids", ""),
+                    "general": generated_raw.get("general", ""),
+                    "pro": generated_raw.get("pro", "")
                 }
-                source_item["tags"] = generated.get("tags", source_item["tags"])
+                source_item["tags"] = generated_raw.get("tags", source_item["tags"])
                 source_item["status"] = "review"
                 save_json(NEWS, source_item["slug"], source_item)
+                generated += 1
+                print(f"[OK] generation {source_item['id']}: saved to news ({generated}/{max_generations})")
             else:
                 save_json(INBOX, source_item["id"], source_item)
+            time.sleep(5)
         except Exception as exc:
             source_item["generation_error"] = str(exc)[:500]
             save_json(INBOX, source_item["id"], source_item)
             print(f"[WARN] generation {source_item['id']}: {exc}")
 
-    print("Agent run complete. Items remain in review until editorial approval.")
+    print(f"Agent run complete. Generated {generated} items this run. "
+          "Items remain in review until editorial approval.")
 
 
 if __name__ == "__main__":
