@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 import os
 import re
-import time
 import hashlib
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
@@ -16,6 +16,9 @@ CONFIG = json.loads((ROOT / "config/sources.json").read_text(encoding="utf-8"))
 INBOX = ROOT / "data/inbox"
 NEWS = ROOT / "data/news"
 USER_AGENT = "AI-Portal-Agent/0.1 (+https://github.com/)"
+
+MAX_PER_RUN = int(os.getenv("MAX_GENERATIONS_PER_RUN", "10"))
+DELAY_BETWEEN = float(os.getenv("GENERATION_DELAY", "4"))
 
 
 def get_json(url: str):
@@ -111,17 +114,26 @@ def collect_huggingface(limit):
     return out
 
 
+def strip_fences(text: str) -> str:
+    stripped = (text or "").strip()
+    if stripped.startswith("```"):
+        stripped = re.sub(r"^```[a-zA-Z]*\s*", "", stripped)
+        stripped = re.sub(r"\s*```$", "", stripped)
+    return stripped.strip()
+
+
 def gemini_generate(source_item):
+    """Возвращает (generated, err). generated=None при ошибке."""
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        return None
+        return None, "GEMINI_API_KEY is not set"
     model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
     prompt = f"""
 Ты редактор русскоязычного образовательного портала об ИИ.
 Подготовь три самостоятельные версии материала по предоставленным метаданным.
 Не добавляй неподтверждённые факты. Если данных недостаточно, прямо обозначь ограничения.
 Верни только JSON с ключами summary, kids, general, pro, tags.
-kids: понятно школьнику 8-14 лет, с аналогией и без опасных инструкций.
+kids: понятно школьнику 8–14 лет, с аналогией и без опасных инструкций.
 general: для широкой аудитории, объясни практическую значимость.
 pro: техническая выжимка для разработчиков, отделяй факты от предположений.
 Сохрани ссылку на первоисточник отдельно, не выдумывай цитаты.
@@ -130,34 +142,42 @@ pro: техническая выжимка для разработчиков, о
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     payload = {"contents": [{"parts": [{"text": prompt}]}],
                "generationConfig": {"responseMimeType": "application/json", "temperature": 0.2}}
-    last_exc = None
-    for attempt in range(4):
+    req = Request(url, data=json.dumps(payload).encode(), headers={
+        "Content-Type": "application/json", "User-Agent": USER_AGENT
+    })
+
+    retries = [(15, "1"), (30, "2"), (60, "3")]
+    for attempt, (wait_default, _) in enumerate(retries, start=1):
+        err_detail = ""
         try:
-            req = Request(url, data=json.dumps(payload).encode(), headers={
-                "Content-Type": "application/json", "User-Agent": USER_AGENT
-            })
             with urlopen(req, timeout=120) as response:
                 data = json.loads(response.read().decode())
-            text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
-            if text.startswith("```"):
-                text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.S)
-            return json.loads(text)
-        except HTTPError as exc:
-            if exc.code not in (429, 503):
-                raise
-            if attempt == 3:
-                raise
-            retry_after = exc.headers.get("Retry-After") or ""
-            wait = int(retry_after) if retry_after.isdigit() else 15 * (attempt + 1)
-            print(f"[RETRY] {source_item['id']}: HTTP {exc.code}, повтор через {wait}s")
-            time.sleep(wait)
-        except TimeoutError:
-            last_exc = exc
-            if attempt == 3:
-                raise
-            print(f"[RETRY] {source_item['id']}: таймаут, повтор через 15s")
-            time.sleep(15)
-    raise last_exc if last_exc else RuntimeError("generation failed")
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            return json.loads(strip_fences(text)), None
+        except HTTPError as http_exc:
+            code = http_exc.code
+            try:
+                err_detail = http_exc.read().decode("utf-8", errors="replace")[:400]
+            except Exception:
+                err_detail = ""
+            if code in (429, 503) and attempt <= len(retries) - 1:
+                wait = wait_default
+                retry_after = http_exc.headers.get("Retry-After") if http_exc.headers else None
+                if retry_after and str(retry_after).strip().isdigit():
+                    wait = max(wait, int(str(retry_after).strip()))
+                print(f"[RETRY] {source_item['id']}: HTTP {code}, повтор через {wait}s")
+                time.sleep(wait)
+                continue
+            return None, f"Gemini HTTP {code}: {err_detail}"
+        except (URLError, TimeoutError, OSError) as net_exc:
+            if attempt <= len(retries) - 1:
+                print(f"[RETRY] {source_item['id']}: {net_exc}, повтор через {wait_default}s")
+                time.sleep(wait_default)
+                continue
+            return None, str(net_exc)
+        except Exception as exc:
+            return None, str(exc)
+    return None, "generation failed after retries"
 
 
 def save_json(folder: Path, name: str, data):
@@ -168,7 +188,6 @@ def save_json(folder: Path, name: str, data):
 
 def main():
     limit = int(os.getenv("MAX_ITEMS_PER_SOURCE", CONFIG.get("max_items_per_source", 10)))
-    max_generations = int(os.getenv("MAX_GENERATIONS", "15"))
     collectors = [
         ("hackernews", collect_hn),
         ("arxiv", collect_arxiv),
@@ -196,37 +215,39 @@ def main():
             print(f"[WARN] {source_id}: unexpected error: {exc}")
 
     new_items = [x for x in collected if x["url"] not in existing]
-    print(f"Collected {len(collected)}; new {len(new_items)}")
-    generated = 0
-    for source_item in new_items:
-        if generated >= max_generations:
-            remaining = len(new_items) - generated
-            print(f"[SKIP] достигнут лимит {max_generations} генераций на запуск; "
-                  f"{remaining} записей попробуют снова в следующем запуске")
-            break
-        try:
-            generated_raw = gemini_generate(source_item)
-            if generated_raw:
-                source_item["summary"] = generated_raw.get("summary", "")
-                source_item["content"] = {
-                    "kids": generated_raw.get("kids", ""),
-                    "general": generated_raw.get("general", ""),
-                    "pro": generated_raw.get("pro", "")
-                }
-                source_item["tags"] = generated_raw.get("tags", source_item["tags"])
-                source_item["status"] = "review"
-                save_json(NEWS, source_item["slug"], source_item)
-                generated += 1
-                print(f"[OK] generation {source_item['id']}: saved to news ({generated}/{max_generations})")
-            else:
-                save_json(INBOX, source_item["id"], source_item)
-            time.sleep(5)
-        except Exception as exc:
-            source_item["generation_error"] = str(exc)[:500]
-            save_json(INBOX, source_item["id"], source_item)
-            print(f"[WARN] generation {source_item['id']}: {exc}")
+    print(f"Collected {len(collected)}; new {len(new_items)}; "
+          f"генерируем до {MAX_PER_RUN} за запуск")
 
-    print(f"Agent run complete. Generated {generated} items this run. "
+    generated_count = 0
+    for idx, source_item in enumerate(new_items):
+        if generated_count >= MAX_PER_RUN:
+            print(f"[SKIP] осталось {len(new_items) - idx} записей — лимит на запуск исчерпан, подождите следующего прогона")
+            break
+        generated, err = gemini_generate(source_item)
+        if generated:
+            source_item["summary"] = generated.get("summary", "")
+            source_item["content"] = {
+                "kids": generated.get("kids", ""),
+                "general": generated.get("general", ""),
+                "pro": generated.get("pro", "")
+            }
+            source_item["tags"] = generated.get("tags", source_item["tags"])
+            source_item["status"] = "review"
+            save_json(NEWS, source_item["slug"], source_item)
+            generated_count += 1
+            print(f"[OK] generation {source_item['id']}: saved to news ({generated_count}/{MAX_PER_RUN})")
+        else:
+            source_item["generation_error"] = (err or "unknown error")[:500]
+            save_json(INBOX, source_item["id"], source_item)
+            print(f"[WARN] generation {source_item['id']}: {err}")
+            if err and "HTTP 429" in err:
+                print("[STOP] квота исчерпана — останавливаю генерацию до следующего запуска; "
+                      "оставшиеся записи уже в очереди")
+                break
+        if idx < len(new_items) - 1:
+            time.sleep(DELAY_BETWEEN)
+
+    print(f"Agent run complete. Generated {generated_count} items this run. "
           "Items remain in review until editorial approval.")
 
 
