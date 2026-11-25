@@ -257,9 +257,10 @@ class AIProviderManager:
                 retryable = self._is_retryable(error)
                 logger.warning(
                     "AI request failed provider=%s error_type=%s retryable=%s error=%s",
-                    provider.name,
-                    type(error).__name__,
+                    provider_name,
+                    type(exc).__name__,
                     retryable,
+                    str(exc),
                 )
                 if not retryable or attempt >= self.max_retries or not self._can_use(provider):
                     raise
