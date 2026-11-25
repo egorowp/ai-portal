@@ -1,0 +1,15 @@
+{
+  "id": "cbe1c1a30ea66377",
+  "slug": "llm-uncertainty2-gemma4-12b-zhtw-6144-lr1e-6-ep5-64-128-256-turn-v6-no",
+  "title": "LLM-Uncertainty2/gemma4_12B_zhtw_6144_lr1e-6_ep5_64_128_256_turn_v6_no_cot_aug_original_no_base",
+  "url": "https://huggingface.co/LLM-Uncertainty2/gemma4_12B_zhtw_6144_lr1e-6_ep5_64_128_256_turn_v6_no_cot_aug_original_no_base",
+  "source": "Hugging Face",
+  "published_at": "2026-11-25T09:43:46.000Z",
+  "description": "Модель из каталога Hugging Face.",
+  "tags": [
+    "models",
+    "Hugging Face"
+  ],
+  "status": "review",
+  "created_at": "2026-11-25T10:03:19.327483+00:00"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "130f1453e8425050",
+  "slug": "loom-fun-staging-jdopensource-joyai-llm-flash-loom",
+  "title": "loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom",
+  "url": "https://huggingface.co/loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom",
+  "source": "Hugging Face",
+  "published_at": "2026-11-24T18:28:59.000Z",
+  "description": "Модель из каталога Hugging Face.",
+  "tags": [
+    "models",
+    "Hugging Face",
+    "JoyAI-LLM-Flash-loom",
+    "review",
+    "HTTP 429"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:54:14.903076+00:00",
+  "summary": "В метаданных описана модель loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom из каталога Hugging Face. Описание ограничено указанием, что это модель из каталога Hugging Face; статус — review; генерация описания завершилась ошибкой HTTP 429. Данных для оценки возможностей, архитектуры, лицензии и безопасности недостаточно. Первоисточник: https://huggingface.co/loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom",
+  "content": {
+    "kids": "Представь, что в библиотеке есть карточка с названием книги, но без описания и без страниц. По названию можно догадаться, что речь об ИИ, но нельзя сказать, чему эта книга учит и можно ли ей доверять. Здесь так же: есть страница модели JoyAI-LLM-Flash-loom в каталоге Hugging Face, но подробностей почти нет. Поэтому вывод простой: сначала нужно посмотреть первоисточник и описание модели, а пока считать, что данных недостаточно.",
+    "general": "Это страница модели в каталоге Hugging Face, а не подтверждение её качества или применимости. Практическая значимость пока ограничена: модель опубликована в каталоге и находится на ревью, но в метаданных нет сведений об архитектуре, параметрах, лицензии, бенчмарках и ограничениях. Перед использованием нужно открыть первоисточник и проверить model card, лицензию, тесты и условия применения. В метаданных также указана ошибка генерации HTTP 429, поэтому описание неполное.",
+    "pro": "Факты из метаданных: id=130f1453e8425050; slug=loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom; title=loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom; url=https://huggingface.co/loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom; source=Hugging Face; published_at=2026-11-24T18:28:59.000Z; description=Модель из каталога Hugging Face; tags=models, Hugging Face; status=review; created_at=2026-11-24T20:54:14.903076+00:00; generation_error=HTTP Error 429: Too Many Requests. Предположения, не подтверждённые метаданными: название может указывать на LLM, Flash или loom, но архитектура, число параметров, токенизатор, обучающие данные, лицензия и бенчмарки неизвестны. Ограничения: данных недостаточно для технической оценки; ошибка 429 относится к генерации описания, а не к свойствам модели. Первоисточник: https://huggingface.co/loom-fun-staging/jdopensource-JoyAI-LLM-Flash-loom"
+  },
+  "ai_provider": "openrouter",
+  "ai_model": "openrouter/free",
+  "generated_at": "2026-11-25T10:03:54.716834+00:00"
+}

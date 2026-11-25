@@ -1,0 +1,15 @@
+{
+  "id": "39e67b1b4a7b61b8",
+  "slug": "omniact-one-policy-one-million-embodiments",
+  "title": "OmniAct: One Policy, One Million Embodiments",
+  "url": "http://arxiv.org/abs/2611.33158v1",
+  "source": "arXiv",
+  "published_at": "2026-11-24T18:59:58Z",
+  "description": "A single policy that controls diverse robots must not only transfer task knowledge across embodiments, but also adapt its behavior to each robot's capabilities. Existing approaches facilitate transfer through shared action representations, but these representations do not necessarily capture how differences in robot morphology should shape manipulation strategies. We introduce OmniAct, a cross-embodiment manipulation policy that conditions directly on each robot's kinematics in a specific scene to produce embodiment-specific behavior. This kinematic graph represents the robot's joint positions, motion axes, and connectivity to its visual observation, allowing the policy to account for how its embodiment related to objects and surfaces in the scene. A flow-matching policy predicts relative joint motions for each node, enabling control across robots with different degrees of freedom and kinematic configurations. To learn how physical structure shapes behavior at scale, we procedurally design and filter one million physically feasible robot embodiments; next, we develop algorithms to generate robot trajectories in simulation for all embodiments; finally, we train across diverse simula",
+  "tags": [
+    "research",
+    "arXiv"
+  ],
+  "status": "review",
+  "created_at": "2026-11-25T10:03:19.222390+00:00"
+}
