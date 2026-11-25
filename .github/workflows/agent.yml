@@ -18,7 +18,9 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.8-flash
-          MAX_ITEMS_PER_SOURCE: '8'
+          MAX_ITEMS_PER_SOURCE: 8
+          MAX_GENERATIONS_PER_RUN: 10
+          GENERATION_DELAY: 4
         run: python -m agent.main
       - name: Commit collected content
         run: |
