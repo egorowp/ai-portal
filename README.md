@@ -49,20 +49,20 @@ git push -u origin main
 
 Необязательные настройки в `Settings → Secrets and variables → Actions → Variables`:
 
-| Variable | Default |
-|---|---|
+| Variable | Default                             |
+|---|-------------------------------------|
 | `AI_PROVIDER_ORDER` | `gemini,groq,openrouter,cloudflare` |
-| `GEMINI_MODEL` | `gemini-2.5-flash` |
-| `GROQ_MODEL` | `openai/gpt-oss-120b` |
-| `OPENROUTER_MODEL` | `openrouter/free` |
-| `CLOUDFLARE_MODEL` | `@cf/meta/llama-3.1-8b-instruct` |
-| `AI_MAX_GENERATIONS_PER_RUN` | `6` |
-| `AI_MAX_RETRIES` | `1` |
-| `AI_TIMEOUT_SECONDS` | `90` |
-| `AI_GEMINI_MAX_REQUESTS` | `12` |
-| `AI_GROQ_MAX_REQUESTS` | `12` |
-| `AI_OPENROUTER_MAX_REQUESTS` | `12` |
-| `AI_CLOUDFLARE_MAX_REQUESTS` | `12` |
+| `GEMINI_MODEL` | `gemini-3.8-flash`                  |
+| `GROQ_MODEL` | `openai/gpt-oss-120b`               |
+| `OPENROUTER_MODEL` | `openrouter/free`                   |
+| `CLOUDFLARE_MODEL` | `@cf/meta/llama-3.1-8b-instruct`    |
+| `AI_MAX_GENERATIONS_PER_RUN` | `6`                                 |
+| `AI_MAX_RETRIES` | `1`                                 |
+| `AI_TIMEOUT_SECONDS` | `90`                                |
+| `AI_GEMINI_MAX_REQUESTS` | `12`                                |
+| `AI_GROQ_MAX_REQUESTS` | `12`                                |
+| `AI_OPENROUTER_MAX_REQUESTS` | `12`                                |
+| `AI_CLOUDFLARE_MAX_REQUESTS` | `12`                                |
 
 Если Variable не создана, код использует значение по умолчанию. Достаточно настроить только один API-ключ; остальные провайдеры без ключей автоматически пропускаются.
 

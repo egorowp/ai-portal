@@ -52,7 +52,7 @@ class AIProviderManager:
             "key": "GEMINI_API_KEY",
             "url": "https://generativelanguage.googleapis.com/v1beta/openai/",
             "model_key": "GEMINI_MODEL",
-            "default_model": "gemini-2.5-flash",
+            "default_model": "gemini-3.8-flash",
         },
         "groq": {
             "key": "GROQ_API_KEY",
@@ -256,7 +256,7 @@ class AIProviderManager:
             except Exception as error:
                 retryable = self._is_retryable(error)
                 logger.warning(
-                    "AI request failed provider=%s error_type=%s retryable=%s",
+                    "AI request failed provider=%s error_type=%s retryable=%s error=%s",
                     provider.name,
                     type(error).__name__,
                     retryable,
@@ -303,7 +303,7 @@ class AIProviderManager:
                 )
                 return result
             except Exception as error:
-                errors.append(f"{provider.name}:{type(error).__name__}")
+                errors.append(f"{provider.name}:{type(error).__name__}: {str(error)[:240]}")
                 logger.warning("Fallback: provider=%s failed; trying next configured provider", provider.name)
 
         raise AIProviderError("All AI providers failed: " + ", ".join(errors))
