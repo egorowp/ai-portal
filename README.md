@@ -7,7 +7,7 @@
 - Сбор материалов из Hacker News, arXiv, GitHub и Hugging Face.
 - Нормализация и дедупликация по URL.
 - Сохранение карточек источников в `data/inbox/`.
-- Генерация трёх уровней материала через Gemini API (опционально).
+- Генерация трёх уровней материала через единый AI Provider Manager: Gemini, Groq, OpenRouter и Cloudflare Workers AI.
 - Без API-ключа материалы остаются в `review`, а не публикуются автоматически.
 - Astro отображает материалы из `data/news/` и страницы разделов.
 - GitHub Actions запускает сборщик по расписанию и собирает сайт.
@@ -29,22 +29,48 @@ git init
 git add .
 git commit -m "Initial AI Portal scaffold"
 git branch -M main
-git remote add origin https://github.com/egorowp/ai-portal.git
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/ai-portal.git
 git push -u origin main
 ```
 
 Замените `YOUR_GITHUB_USERNAME` на свой GitHub username.
 
-## 3. Настроить Gemini (необязательно для первого запуска)
+## 3. Настроить AI-провайдеры
 
-1. Получите API-ключ в Google AI Studio: https://aistudio.google.com/apikey
-2. В GitHub откройте `Settings → Secrets and variables → Actions → New repository secret`.
-3. Имя секрета: `GEMINI_API_KEY`.
-4. Вставьте ключ в Secret value.
+Агент использует OpenAI-compatible Chat Completions API. Провайдеры вызываются в порядке `AI_PROVIDER_ORDER`; при временной ошибке, недоступности или некорректном JSON ответе агент пробует следующий провайдер.
 
-Модель задаётся переменной `GEMINI_MODEL` в workflow. Бесплатные квоты и доступность моделей меняются; проверьте актуальную модель в документации Gemini API.
+Добавьте ключи в `Settings → Secrets and variables → Actions → Secrets`:
 
-Важно: передавайте модели только общедоступные материалы, которые допустимо отправлять стороннему API. Не отправляйте приватные данные.
+- `GEMINI_API_KEY` — Google AI Studio.
+- `GROQ_API_KEY` — Groq.
+- `OPENROUTER_API_KEY` — OpenRouter.
+- `CLOUDFLARE_API_TOKEN` — Cloudflare API token с доступом Workers AI.
+- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare Account ID (Secret или Actions Variable).
+
+Необязательные настройки в `Settings → Secrets and variables → Actions → Variables`:
+
+| Variable | Default |
+|---|---|
+| `AI_PROVIDER_ORDER` | `gemini,groq,openrouter,cloudflare` |
+| `GEMINI_MODEL` | `gemini-2.5-flash` |
+| `GROQ_MODEL` | `openai/gpt-oss-120b` |
+| `OPENROUTER_MODEL` | `openrouter/free` |
+| `CLOUDFLARE_MODEL` | `@cf/meta/llama-3.1-8b-instruct` |
+| `AI_MAX_GENERATIONS_PER_RUN` | `6` |
+| `AI_MAX_RETRIES` | `1` |
+| `AI_TIMEOUT_SECONDS` | `90` |
+| `AI_GEMINI_MAX_REQUESTS` | `12` |
+| `AI_GROQ_MAX_REQUESTS` | `12` |
+| `AI_OPENROUTER_MAX_REQUESTS` | `12` |
+| `AI_CLOUDFLARE_MAX_REQUESTS` | `12` |
+
+Если Variable не создана, код использует значение по умолчанию. Достаточно настроить только один API-ключ; остальные провайдеры без ключей автоматически пропускаются.
+
+**Важно о бесплатности:** бесплатные тарифы, лимиты и доступность моделей меняются. OpenRouter `openrouter/free` маршрутизирует запросы только на бесплатные модели; для остальных провайдеров проверьте стоимость выбранной модели и условия аккаунта. Наличие API-ключа само по себе не гарантирует нулевую стоимость. Установите бюджет/ограничения у провайдера, если они доступны.
+
+Агент повторно обрабатывает элементы `data/inbox/` после наступления `retry_after`. Число попыток ограничено `INBOX_MAX_ATTEMPTS` (по умолчанию 8). Неуспешные материалы не публикуются автоматически и остаются на проверке.
+
+Важно: передавайте моделям только общедоступные материалы, которые допустимо отправлять стороннему API. Не отправляйте приватные данные.
 
 ## 4. Локальный запуск агента
 
@@ -60,8 +86,8 @@ source .venv/bin/activate
 python -m agent.main
 ```
 
-Без `GEMINI_API_KEY` агент соберёт источники в `data/inbox/` со статусом `review`.
-С ключом попробует сформировать три редакции и сохранит результат в `data/news/` со статусом `review` — автоматическая публикация в MVP выключена.
+Без настроенных AI API-ключей агент соберёт источники в `data/inbox/`.
+Если настроен хотя бы один ключ, агент попробует сформировать три редакции и сохранит результат в `data/news/` со статусом `review` — автоматическая публикация выключена.
 
 ## 5. Локальный запуск сайта
 
@@ -90,7 +116,7 @@ npm run build
 
 В настройках репозитория: `Settings → Pages → Build and deployment → Source: GitHub Actions`.
 
-В `Settings → Secrets and variables → Actions` можно добавить `GEMINI_API_KEY`.
+В `Settings → Secrets and variables → Actions` добавьте ключи нужных AI-провайдеров (см. раздел 3).
 Расписание workflow задано в UTC. Ручной запуск доступен через `Actions → Run workflow`.
 
 ## 7. Что входит в модель данных

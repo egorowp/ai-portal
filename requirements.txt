@@ -1,1 +1,2 @@
-# Python agent uses the standard library only.
+# OpenAI-compatible SDK used by Gemini, Groq, OpenRouter and Cloudflare Workers AI.
+openai>=1.55.0,<3.0.0

@@ -17,13 +17,38 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+      - name: Install agent dependencies
+        run: python -m pip install -r requirements.txt
       - name: Run agent
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-3.8-flash
-          MAX_ITEMS_PER_SOURCE: 8
-          MAX_GENERATIONS_PER_RUN: 6
-          GENERATION_DELAY: 4
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+          AI_PROVIDER_ORDER: ${{ vars.AI_PROVIDER_ORDER }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          CLOUDFLARE_MODEL: ${{ vars.CLOUDFLARE_MODEL }}
+          OPENROUTER_HTTP_REFERER: ${{ vars.OPENROUTER_HTTP_REFERER }}
+          AI_MAX_GENERATIONS_PER_RUN: ${{ vars.AI_MAX_GENERATIONS_PER_RUN }}
+          AI_MAX_RETRIES: ${{ vars.AI_MAX_RETRIES }}
+          AI_TIMEOUT_SECONDS: ${{ vars.AI_TIMEOUT_SECONDS }}
+          AI_RETRY_BASE_SECONDS: ${{ vars.AI_RETRY_BASE_SECONDS }}
+          AI_MAX_RETRY_DELAY_SECONDS: ${{ vars.AI_MAX_RETRY_DELAY_SECONDS }}
+          AI_MAX_TOKENS: ${{ vars.AI_MAX_TOKENS }}
+          AI_GEMINI_MAX_REQUESTS: ${{ vars.AI_GEMINI_MAX_REQUESTS }}
+          AI_GROQ_MAX_REQUESTS: ${{ vars.AI_GROQ_MAX_REQUESTS }}
+          AI_OPENROUTER_MAX_REQUESTS: ${{ vars.AI_OPENROUTER_MAX_REQUESTS }}
+          AI_CLOUDFLARE_MAX_REQUESTS: ${{ vars.AI_CLOUDFLARE_MAX_REQUESTS }}
+          MAX_ITEMS_PER_SOURCE: ${{ vars.MAX_ITEMS_PER_SOURCE }}
+          GENERATION_DELAY: ${{ vars.GENERATION_DELAY }}
+          INBOX_MAX_ATTEMPTS: ${{ vars.INBOX_MAX_ATTEMPTS }}
+          INBOX_RETRY_BASE_SECONDS: ${{ vars.INBOX_RETRY_BASE_SECONDS }}
+          INBOX_RETRY_MAX_SECONDS: ${{ vars.INBOX_RETRY_MAX_SECONDS }}
+          LOG_LEVEL: ${{ vars.LOG_LEVEL || 'INFO' }}
         run: python -m agent.main
       - name: Commit collected content
         run: |
