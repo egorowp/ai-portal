@@ -1,0 +1,15 @@
+{
+  "id": "76480d569b1494b1",
+  "slug": "show-hn-dualayer-hierarchy-standard-dhs-zero-fhs-layout-for-musl-and-g",
+  "title": "Show HN: Dualayer Hierarchy Standard (DHS) – Zero-FHS Layout for Musl and Glibc",
+  "url": "https://news.ycombinator.com/item?id=50645376",
+  "source": "Hacker News",
+  "published_at": "2026-11-25T18:07:53Z",
+  "description": "Dualayer Hierarchy Standard (DHS: Repo: https:&#x2F;&#x2F;github.com&#x2F;Zainium-Dynamics&#x2F;dualayer-hierarchy-stand... Full Specification (23-page PDF): https:&#x2F;&#x2F;zainiumdynamics.tech&#x2F;dhs DHS 1.1 defines a layered filesystem hierarchy for immutable Linux systems where musl and glibc coexist side by side without conflict. Either C library can be primary; the distribution chooses. Root layout (no &#x2F;usr, &#x2F;bin, &#x2F;sbin, &#x2F;lib, &#x2F;lib64, &#x2F;etc, &#x2F;var, or &#x2F;boot at &#x2F;, not even as symlinks): &#x2F; |-- overlayer&#x2F; (the entire OS: all layers) |-- home&#x2F; (user home directories) |-- root&#x2F; (root home) |-- dev&#x2F; (devtmpfs) |-- proc&#x2F; (procfs) |-- sys&#x2F; (sysfs) |-- run&#x2F; (tmpfs; removable media at &#x2F;run&#x2F;media&#x2F;user&#x2F;label) `-- tmp&#x2F; (temporary files) Layer structure under &#x2F;overlayer (composed at boot via OverlayFS with syshub as lower and userland&#x2F;union as upper): &#x2F;overlayer&#x2F; |-- syshub&#x2F; (read-only base OS; boots without userland) |-- userland&#x2F; (installed packages: union&#x2F;, work&#x2F;, registry&#x2F;) |-- ignition&#x2F; (kernels, initramfs, bootloader; read-o",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-25T19:22:35.852188+00:00"
+}

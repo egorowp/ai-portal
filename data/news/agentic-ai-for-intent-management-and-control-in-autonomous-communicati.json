@@ -1,0 +1,30 @@
+{
+  "id": "2ec5c94f5ee39e14",
+  "slug": "agentic-ai-for-intent-management-and-control-in-autonomous-communicati",
+  "title": "Agentic AI for Intent Management and Control in Autonomous Communication Networks",
+  "url": "http://arxiv.org/abs/2611.31223v1",
+  "source": "arXiv",
+  "published_at": "2026-11-23T18:57:32Z",
+  "description": "Artificial intelligence (AI)-driven automation will help future mobile networks translate high-level network intents into concrete network optimization or control actions. However, existing approaches often focus on intent management and orchestration, leaving the adaptation of underlying network optimization and control functions largely unaddressed. This article proposes a triadic agentic AI framework that co-designs intent management and intent fulfillment through three agents: an interpreter, powered by a language model, that translates and refines intents into machine-readable optimization templates; an optimizer that adapts controller policies to intent specifications; and a controller that performs fast decision-making. We discuss the design space of each agent and how the workflow can be embedded across network architectural domains. Finally, we develop a concrete realization combining a language-model interpreter with Bayesian optimization for the optimizer and multi-objective reinforcement learning for the controller, and evaluate it in a radio resource management case study for differentiated connectivity. Results demonstrate how the agentic AI framework can connect high",
+  "tags": [
+    "arXiv",
+    "agentic AI",
+    "сети связи",
+    "управление интентами",
+    "радиоресурсы",
+    "исследование"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:54:14.337836+00:00",
+  "generation_attempts": 2,
+  "last_attempt_at": "2026-11-25T15:39:23.636565+00:00",
+  "summary": "Материал arXiv посвящён агентной архитектуре ИИ для управления «интентами» в будущих мобильных сетях: высокоуровневые цели сети предлагается переводить в конкретные действия оптимизации и управления. Авторы описывают трёхагентную схему — интерпретатор на основе языковой модели, оптимизатор и контроллер — и демонстрируют пример реализации с байесовской оптимизацией и многокритериальным обучением с подкреплением в кейсе управления радиоресурсами. В предоставленных метаданных описание обрывается, поэтому точные результаты, метрики и полные выводы не приводятся. Первоисточник: http://arxiv.org/abs/2611.31223v1",
+  "content": {
+    "kids": "Представь, что ты говоришь сети: «Хочу, чтобы в этом районе видео не тормозило». Сеть сама должна понять эту просьбу и настроить оборудование. В статье предлагают трёх помощников: один переводит просьбу на понятный машине язык, второй подбирает настройки, а третий быстро принимает решения. Это похоже на команду: переводчик, настройщик и диспетчер. Авторы проверяют идею на примере управления радиосвязью, но в доступном описании нет точных цифр результатов, поэтому нельзя сказать, насколько всё работает лучше.",
+    "general": "Исследование рассматривает, как автоматизировать мобильные сети с помощью агентного ИИ. Идея в том, чтобы оператор или система задавали цель вроде «обеспечить разное качество связи для разных сервисов», а сеть сама превращала её в настройки и действия. Авторы предлагают разделить работу между тремя агентами: интерпретатором на языковой модели, оптимизатором и быстрым контроллером. Практическая значимость в том, что такой подход может связать управление целями с реальной оптимизацией сети, а не ограничиваться только оркестрацией. Однако это исследовательская работа: в метаданных нет полных результатов и метрик, поэтому делать выводы о готовности к внедрению нельзя.",
+    "pro": "Факты из метаданных: статья arXiv предлагает triadic agentic AI framework для co-design intent management и intent fulfillment в автономных коммуникационных сетях. Компоненты: interpreter на основе language model, который переводит и уточняет интенты в machine-readable optimization templates; optimizer, адаптирующий политики контроллера под спецификации интента; controller для быстрого принятия решений. Обсуждаются design space каждого агента и встраивание workflow в архитектурные домены сети. Конкретная реализация: LM-interpreter + Bayesian optimization для optimizer + multi-objective reinforcement learning для controller; оценка в radio resource management case study для differentiated connectivity. Ограничения: описание в метаданных обрывается на фразе о результатах, поэтому точные метрики, baseline, размеры экспериментов и выводы не подтверждены. Предположения: framework может улучшить связку высокоуровневых интентов с оптимизацией и управлением, но без полного текста это остаётся гипотезой. Первоисточник: http://arxiv.org/abs/2611.31223v1"
+  },
+  "ai_provider": "openrouter",
+  "ai_model": "openrouter/free",
+  "generated_at": "2026-11-25T19:24:20.442346+00:00"
+}
