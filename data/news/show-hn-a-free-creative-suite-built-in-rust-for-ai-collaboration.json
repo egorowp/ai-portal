@@ -1,0 +1,24 @@
+{
+  "id": "2472106cb00c1141",
+  "slug": "show-hn-a-free-creative-suite-built-in-rust-for-ai-collaboration",
+  "title": "Show HN: A free creative suite, built in Rust, for AI collaboration",
+  "url": "https://codeyam.com/apps/cadyam",
+  "source": "Hacker News",
+  "published_at": "2026-11-23T16:17:11Z",
+  "description": "Hi HN, I&#x27;m Nadia, one of the makers of CadYam. My cofounder Jared is here to answer questions as well. CadYam is a desktop design app built for a person and an AI agent to work on the same project: a CAD drawing, a video, an interior design plan, a data analysis, etc. You can sketch something by asking it to your agent and drop a pin on a specific place to ask for changes. We built this after a lot of frustration trying to learn traditional CAD tools, which have a steep learning curve and take a lot of time and effort before you can build anything complex. With CadYam, the agent can do the work for you with your guidance or teach you how to use the app if you&#x27;d like to do some manual work yourself, so you also don&#x27;t always need the agent. The agent&#x27;s changes show up as a preview you iterate on with natural language. No technical skills required to use it. You can watch a short demo (under a minute) at https:&#x2F;&#x2F;youtu.be&#x2F;NbA28Pshxyo or click around some demo exports in your browser without installing anything: https:&#x2F;&#x2F;codeyam-ai.github.io&#x2F;cadyam-exports&#x2F; We were also inspired by the HN threads about creative tools rebuilt in Rust,",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:29.685700+00:00",
+  "summary": "CadYam – бесплатный настольный креативный набор, написанный на Rust, позволяющий человеку и AI‑агенту совместно работать над проектами (CAD‑чертежи, видео, дизайн интерьера, анализ данных и др.) через естественный язык без необходимости в технических навыках.",
+  "content": {
+    "kids": "Представь, что ты рисуешь картинку, а рядом с тобой сидит умный помощник‑робот. Ты говоришь ему, что хочешь изменить: «Сделай дом больше», «Добавь окно», – и робот показывает, как будет выглядеть твоя идея. Приложение CadYam работает так: ты можешь рисовать, а робот помогает исправлять и улучшать рисунок, показывая результат сразу. Всё делается простыми словами, без сложных программных кнопок.",
+    "general": "CadYam – это бесплатное настольное приложение, созданное на языке программирования Rust, которое объединяет возможности традиционных CAD‑инструментов и искусственного интеллекта. Пользователь может задавать задачи агенту на естественном языке (например, «перемести стол в центр комнаты»), а агент генерирует изменения и показывает их в виде превью. Это ускоряет процесс создания сложных проектов, снижает порог входа для новичков и позволяет использовать AI как помощника или наставника, когда требуется ручное вмешательство.",
+    "pro": "CadYam – desktop design suite built in Rust for collaborative human‑AI workflows. Core features:\n- Natural‑language driven interaction: users issue commands (e.g., \"add a fillet to edge X\") and the AI agent returns a preview of modifications.\n- Dual‑mode operation: the agent can fully generate content or act as an instructional guide while the user performs manual edits.\n- Multi‑domain support: CAD drawings, video editing, interior design layouts, data analysis visualizations, etc.\n- Rust implementation provides memory safety, zero‑cost abstractions, and high performance, addressing the latency and stability issues common in traditional CAD tools.\n- No technical prerequisites: the UI abstracts away low‑level CAD commands, exposing only high‑level intents.\n- Demo resources: a <1‑minute video (https://youtu.be/NbA28Pshxyo) and browser‑based export previews (https://codeyam-ai.github.io/cadyam-exports/).\nLimitations: currently a desktop app; cloud‑based collaboration, plugin ecosystem, and extensive file‑format support are not yet documented. Future roadmap may include expanded asset libraries and integration with existing CAD standards.\nAssumptions: the AI agent likely leverages large language models fine‑tuned for design tasks, but exact model details are not disclosed in the source."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-25T11:02:00.777190+00:00"
+}

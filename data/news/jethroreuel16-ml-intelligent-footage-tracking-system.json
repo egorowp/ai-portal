@@ -1,0 +1,28 @@
+{
+  "id": "1fdcd2ddbf0177d8",
+  "slug": "jethroreuel16-ml-intelligent-footage-tracking-system",
+  "title": "JethroReuel16/ML-INTELLIGENT-FOOTAGE-TRACKING-SYSTEM",
+  "url": "https://github.com/JethroReuel16/ML-INTELLIGENT-FOOTAGE-TRACKING-SYSTEM",
+  "source": "GitHub",
+  "published_at": "2026-11-24T13:31:47Z",
+  "description": "Machine learning intelligent footage tracking system is a web-based artificial intelligence system that allows an authorized user to locate a specific physical object inside recorded video footage by supplying a photograph of that object. The user uploads a reference image, selects one or more video sources",
+  "tags": [
+    "open-source",
+    "GitHub",
+    "AI",
+    "video analysis",
+    "object detection",
+    "machine learning"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:30.201035+00:00",
+  "summary": "ML‑Intelligent Footage Tracking System – открытый веб‑сервис, использующий машинное обучение для поиска заданного физического объекта в записанном видеоматериале по загруженной фотографии. Пользователь загружает эталонное изображение, выбирает одно или несколько видеопотоков, после чего система определяет, где в кадре находится объект.",
+  "content": {
+    "kids": "Представь, что у тебя есть волшебный помощник, который может искать любой предмет в видеозаписях, если ты покажешь ему его фото. Ты загружаешь картинку, например, мячика, выбираешь видео, где может быть мяч, а система быстро показывает, где он спрятался. Всё это работает в интернете и помогает находить нужные вещи без долгих поисков.",
+    "general": "Система ML‑Intelligent Footage Tracking позволяет быстро находить конкретные объекты в архивных видеозаписях. Это полезно для расследований, мониторинга безопасности, анализа спортивных матчей и любой задачи, где нужно отследить появление определённого предмета в большом объёме видеоданных. Пользователь просто загружает фото искомого объекта и выбирает видеофайлы – система автоматически помечает все найденные совпадения.",
+    "pro": "The repository implements a web‑based AI pipeline for object retrieval in video archives. Key components (as inferred from the description) likely include:\n- Front‑end for user authentication, reference image upload, and video source selection.\n- Backend service that extracts frames from the selected video streams.\n- A machine‑learning model (e.g., a CNN‑based feature extractor such as ResNet or a Siamese network) to compute embeddings for both the reference image and video frames.\n- Approximate nearest‑neighbor search (FAISS, Annoy) to match frame embeddings against the reference embedding.\n- Result visualization highlighting detected instances.\n\nAssumptions: The system is open‑source (GitHub) and written for web deployment, possibly using Flask/Django for the API and a JavaScript framework for the UI. No details on model training data, performance metrics, or scalability are provided; these would need to be verified in the repository.\n\nLimitations: The available metadata does not specify programming language, model architecture, hardware requirements, or integration capabilities with external video storage. Further inspection of the source code is required for concrete implementation details."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-25T11:00:28.200829+00:00"
+}
