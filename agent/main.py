@@ -180,7 +180,7 @@ pro: техническая выжимка для разработчиков, о
             {"role": "user", "content": prompt},
         ],
         temperature=0.2,
-        max_tokens=int(os.getenv("AI_MAX_TOKENS", "3500")),
+        max_tokens=env_int("AI_MAX_TOKENS", 3500, minimum=1),
         validator=validate_generated_content,
     )
     return validate_generated_content(result.text), result
@@ -342,7 +342,7 @@ def main():
                 generated_count += 1
                 print(
                     f"[OK] generation {source_item['id']}: provider={result.provider} "
-                    f"model={result.model} saved to news ({generated_count}/{MAX_PER_RUN})"
+                    f"model={result.model} saved to news ({generated_count}/{manager.max_generations})"
                 )
             except Exception as exc:
                 attempts = env_int_value(source_item.get("generation_attempts", 0), 0) + 1
