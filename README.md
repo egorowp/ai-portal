@@ -29,7 +29,7 @@ git init
 git add .
 git commit -m "Initial AI Portal scaffold"
 git branch -M main
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/ai-portal.git
+git remote add origin https://github.com/egorowp/ai-portal.git
 git push -u origin main
 ```
 
