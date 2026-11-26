@@ -1,0 +1,27 @@
+{
+  "id": "030463d64438f589",
+  "slug": "andrzimin72-intelligent-ticket-triage-and-enrichment-agent",
+  "title": "andrzimin72/Intelligent-Ticket-Triage-and-Enrichment-Agent",
+  "url": "https://github.com/andrzimin72/Intelligent-Ticket-Triage-and-Enrichment-Agent",
+  "source": "GitHub",
+  "published_at": "2026-11-24T04:02:03Z",
+  "description": "The MSP AI Platform is an enterprise-grade, multi-tenant artificial intelligence system built on Amazon Web Services (AWS). It automates IT service delivery for Managed Service Providers (MSPs) through AI-powered ticket triage, an interactive IT concierge agent, proactive customer insights, and comprehensive observability.",
+  "tags": [
+    "AI",
+    "AWS",
+    "MSP",
+    "ticket triage",
+    "observability"
+  ],
+  "status": "review",
+  "created_at": "2026-11-26T10:00:32.410715+00:00",
+  "summary": "MSP AI Platform – корпоративная многопользовательская система на AWS, автоматизирующая обслуживание ИТ‑сервисов для провайдеров Managed Service Providers с помощью AI‑триажа тикетов, интерактивного IT‑консьержа, проактивных аналитических данных и полной наблюдаемости.",
+  "content": {
+    "kids": "Представь себе умного помощника‑робота, который получает запросы от пользователей (типа «моя программа не работает») и сразу знает, куда их отправить и как решить. Он работает в облаке Amazon, помогает компаниям, которые обслуживают компьютеры других людей, быстро находить и исправлять проблемы, а также рассказывает, что происходит в системе.",
+    "general": "MSP AI Platform – это облачная система, разработанная для провайдеров управляемых ИТ‑услуг. Она использует искусственный интеллект для автоматической классификации и распределения запросов (тикетов) к нужным специалистам, предоставляет интерактивного IT‑консьержа для общения с клиентами, генерирует проактивные аналитические отчёты и обеспечивает полную наблюдаемость инфраструктуры. Это повышает скорость реагирования, снижает нагрузку на операторов и улучшает качество обслуживания.",
+    "pro": "According to the repository description, the MSP AI Platform is an enterprise‑grade, multi‑tenant AI system built on Amazon Web Services. It implements AI‑powered ticket triage, an interactive IT concierge agent, proactive customer insights, and comprehensive observability. The platform likely leverages typical AWS services (e.g., Lambda for serverless compute, SageMaker for model training/inference, DynamoDB or RDS for data storage, CloudWatch for observability) to achieve scalability and isolation between tenants, though the exact architecture is not detailed in the source. The ticket triage component presumably uses natural language processing models to classify incoming tickets and route them to appropriate teams. The concierge agent provides a conversational interface, possibly built on Amazon Lex or a custom LLM integration. Proactive insights are generated from aggregated ticket data and system metrics, enabling predictive alerts. Observability is achieved through centralized logging, metrics collection, and tracing, allowing operators to monitor performance across all tenants."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-26T15:18:15.757472+00:00"
+}
