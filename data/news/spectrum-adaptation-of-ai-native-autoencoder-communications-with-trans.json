@@ -1,0 +1,27 @@
+{
+  "id": "379874b07d1f442c",
+  "slug": "spectrum-adaptation-of-ai-native-autoencoder-communications-with-trans",
+  "title": "Spectrum Adaptation of AI-Native Autoencoder Communications with Transfer Learning",
+  "url": "http://arxiv.org/abs/2611.34942v1",
+  "source": "arXiv",
+  "published_at": "2026-11-25T18:59:57Z",
+  "description": "End-to-end physical-layer learning replaces separate modulation, coding, and detection operations with an autoencoder (AE) that consists of a jointly trained encoder-decoder pair at the transmitter and the receiver. This paper studies AI-native communications with AEs and quantifies the sensitivity to training-test mismatch in channel models. Models trained only on an AWGN channel achieve low bit error rates (BERs) under matched conditions but degrade severely on Rayleigh fading with practical front-end impairments. To reduce the time and energy required to adapt to new channel conditions, we propose a low-latency transfer-learning procedure that starts from an AWGN-pretrained system and fine-tunes only a small subset of transmitter and receiver layers while freezing the remainder. We further formulate layer selection as a budget-constrained optimization problem that identifies the most informative parameters to update during adaptation. This preserves the learned signal geometry and the deep decision structure while adapting lightweight front ends to fading- and impairment-induced mixing. For AE communications, we show that partial updates remove the mismatch-induced error floor a",
+  "tags": [
+    "AI",
+    "autoencoder",
+    "communication",
+    "transfer learning",
+    "physical layer"
+  ],
+  "status": "review",
+  "created_at": "2026-11-26T09:32:33.829463+00:00",
+  "summary": "В статье рассматривается использование автоэнкодеров (AE) для физического уровня связи, где обучаются совместно кодировщик и декодировщик. Показано, что модели, обученные только на канале AWGN, сильно ухудшаются при работе в условиях Рэйлли‑фейдинга и реальных помех. Предложен быстрый метод адаптации с помощью transfer learning: от предварительно обученной модели на AWGN дообучаются лишь выбранные слои передатчика и приёмника, а остальные замораживаются. Выбор слоёв формулируется как задача оптимизации с ограничением бюджета, что позволяет сохранить геометрию сигнала и структуру принятия решений, устраняя ошибочный «пол».",
+  "content": {
+    "kids": "Учёные сделали «умный» передатчик и приёмник, которые учатся разговаривать друг с другом сами, без отдельных правил. Когда они учились в тихой комнате, всё было хорошо, но в шумной комнате (с помехами) они начали ошибаться. Чтобы быстро исправить это, они «показали» им только небольшую часть новых правил, а остальное оставили как есть. Так они снова начали правильно передавать сообщения, как будто поправили только несколько слов в разговоре.",
+    "general": "Автоэнкодер‑коммуникации заменяют традиционные блоки модуляции, кодирования и детектирования единым нейронным сетевым решением, обучаемым от конца до конца. Однако такие системы чувствительны к различиям между условиями обучения (обычно AWGN‑канал) и реальными условиями (например, Рэйлли‑фейдинг с аппаратными помехами). Авторы предлагают использовать transfer learning: начиная с модели, обученной на простом канале, дообучать лишь небольшую часть её слоёв, что позволяет быстро адаптировать систему к новым условиям без полной переобучения. Выбор слоёв оптимизируется с учётом ограничений вычислительных ресурсов, что делает подход практичным для реальных радиосистем, где требуется быстрая реакция на изменение среды.",
+    "pro": "Paper investigates end‑to‑end physical‑layer learning via autoencoders (AE) comprising jointly trained encoder‑decoder pairs. Baseline models trained exclusively on additive white Gaussian noise (AWGN) channels achieve low BER under matched conditions but exhibit severe performance degradation on Rayleigh fading channels with realistic front‑end impairments. To mitigate the training‑test mismatch, the authors introduce a low‑latency transfer‑learning scheme: starting from an AWGN‑pretrained AE, only a selected subset of transmitter and receiver layers are fine‑tuned while the remaining parameters are frozen. Layer selection is cast as a budget‑constrained optimization problem that identifies the most informative parameters for update, preserving the learned signal geometry and deep decision structure. Experimental results (as reported) indicate that partial updates eliminate the mismatch‑induced error floor, improving robustness to fading and impairment‑induced mixing without full retraining. No quantitative metrics are provided in the abstract; further details would be needed for reproducibility."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-26T10:04:21.067775+00:00"
+}
