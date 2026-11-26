@@ -26,7 +26,7 @@ jobs:
       - name: Build
         working-directory: site
         run: npm run build
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist
   deploy:
