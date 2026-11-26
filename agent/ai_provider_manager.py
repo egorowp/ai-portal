@@ -80,7 +80,7 @@ class AIProviderManager:
             self._int_env("MAX_GENERATIONS_PER_RUN", 6),
             minimum=0,
         )
-        self.max_retries = self._int_env("AI_MAX_RETRIES", 1, minimum=0)
+        self.max_retries = self._int_env("AI_MAX_RETRIES", 2, minimum=0)
         self.timeout = self._float_env("AI_TIMEOUT_SECONDS", 90.0, minimum=1.0)
         self.retry_base = self._float_env("AI_RETRY_BASE_SECONDS", 2.0, minimum=0.0)
         self.max_retry_delay = self._float_env("AI_MAX_RETRY_DELAY_SECONDS", 30.0, minimum=0.0)
@@ -257,10 +257,11 @@ class AIProviderManager:
                 retryable = self._is_retryable(error)
                 logger.warning(
                     "AI request failed provider=%s error_type=%s retryable=%s error=%s",
-                    provider_name,
-                    type(exc).__name__,
+                    provider.name,
+                    type(error).__name__,
                     retryable,
-                    str(exc),
+                    str(error)[:500],
+                    exc_info=True,
                 )
                 if not retryable or attempt >= self.max_retries or not self._can_use(provider):
                     raise
@@ -305,7 +306,13 @@ class AIProviderManager:
                 return result
             except Exception as error:
                 errors.append(f"{provider.name}:{type(error).__name__}: {str(error)[:240]}")
-                logger.warning("Fallback: provider=%s failed; trying next configured provider", provider.name)
+                logger.warning(
+                    "Fallback: provider=%s failed; "
+                    "error_type=%s error=%s; trying next configured provider",
+                    provider.name,
+                    type(error).__name__,
+                    str(error)[:500],
+                )
 
         raise AIProviderError("All AI providers failed: " + ", ".join(errors))
 
