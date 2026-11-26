@@ -132,58 +132,161 @@ def collect_huggingface(limit):
     return out
 
 
+
 def strip_fences(text: str) -> str:
+    """Remove a Markdown code fence only when it wraps the whole response."""
     stripped = (text or "").strip()
-    if stripped.startswith("```"):
-        stripped = re.sub(r"^```[a-zA-Z]*\s*", "", stripped)
-        stripped = re.sub(r"\s*```$", "", stripped)
-    return stripped.strip()
+
+    match = re.fullmatch(
+        r"```(?:json)?\s*\n?(.*?)\n?```",
+        stripped,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if match:
+        stripped = match.group(1).strip()
+
+    return stripped
 
 
 def validate_generated_content(raw: str):
     """Parse and validate the common AI Portal content contract."""
-    generated = json.loads(strip_fences(raw))
+    if not isinstance(raw, str) or not raw.strip():
+        raise ValueError("AI response is empty")
+
+    cleaned = strip_fences(raw)
+
+    try:
+        generated = json.loads(cleaned)
+    except json.JSONDecodeError as exc:
+        if exc.msg == "Extra data":
+            raise ValueError(
+                "AI response contains extra data after JSON "
+                f"(line={exc.lineno}, column={exc.colno}, "
+                f"trailing_chars={len(cleaned) - exc.pos})"
+            ) from exc
+
+        raise ValueError(
+            "AI response contains invalid JSON "
+            f"(line={exc.lineno}, column={exc.colno}, reason={exc.msg})"
+        ) from exc
+
     if not isinstance(generated, dict):
         raise ValueError("AI response must be a JSON object")
 
     required = ("summary", "kids", "general", "pro", "tags")
     missing = [key for key in required if key not in generated]
+
     if missing:
-        raise ValueError("AI response is missing fields: " + ", ".join(missing))
+        raise ValueError(
+            "AI response is missing fields: " + ", ".join(missing)
+        )
 
     for key in ("summary", "kids", "general", "pro"):
-        if not isinstance(generated[key], str) or not generated[key].strip():
-            raise ValueError(f"AI response field '{key}' must be a non-empty string")
+        value = generated[key]
+
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(
+                f"AI response field '{key}' must be a non-empty string"
+            )
 
     if not isinstance(generated["tags"], list) or not all(
-        isinstance(tag, str) and tag.strip() for tag in generated["tags"]
+        isinstance(tag, str) and tag.strip()
+        for tag in generated["tags"]
     ):
-        raise ValueError("AI response field 'tags' must be a list of non-empty strings")
+        raise ValueError(
+            "AI response field 'tags' must be a list of non-empty strings"
+        )
+
     return generated
+
+
 
 
 def generate_content(manager: AIProviderManager, source_item):
     prompt = f"""
-Ты редактор русскоязычного образовательного портала об ИИ.
-Подготовь три самостоятельные версии материала по предоставленным метаданным.
-Не добавляй неподтверждённые факты. Если данных недостаточно, прямо обозначь ограничения.
-Верни только JSON с ключами summary, kids, general, pro, tags.
-kids: понятно школьнику 8–14 лет, с аналогией и без опасных инструкций.
-general: для широкой аудитории, объясни практическую значимость.
-pro: техническая выжимка для разработчиков, отделяй факты от предположений.
-Сохрани ссылку на первоисточник отдельно, не выдумывай цитаты.
-Источник: {json.dumps(source_item, ensure_ascii=False)}
+Ты — редактор русскоязычного образовательного портала об искусственном интеллекте.
+
+На основе предоставленных метаданных подготовь один материал,
+представленный в трёх самостоятельных версиях.
+
+ТРЕБОВАНИЯ К СОДЕРЖАНИЮ:
+
+1. summary — краткое содержание материала.
+2. kids — версия для школьника 8–14 лет:
+   - простые формулировки;
+   - понятная аналогия;
+   - без опасных инструкций.
+3. general — версия для широкой аудитории:
+   - объясни суть;
+   - опиши практическую значимость;
+   - избегай необоснованных утверждений.
+4. pro — техническая версия для разработчиков:
+   - технические детали;
+   - практическое применение;
+   - отделяй подтверждённые факты от предположений.
+5. tags — массив коротких тематических тегов на русском или английском языке.
+
+ТРЕБОВАНИЯ К ДОСТОВЕРНОСТИ:
+
+- Не добавляй неподтверждённые факты.
+- Не выдумывай цитаты, результаты исследований и характеристики.
+- Если данных недостаточно, прямо укажи это.
+- Не представляй предположения как установленные факты.
+- Не выдумывай URL и ссылки.
+- Ссылка на первоисточник уже будет сохранена системой отдельно.
+  Не включай её в JSON.
+
+СТРОГИЙ ФОРМАТ ОТВЕТА:
+
+Верни ровно один корректный JSON-объект.
+
+Обязательная структура:
+
+{{
+  "summary": "Краткое содержание",
+  "kids": "Материал для школьников",
+  "general": "Материал для широкой аудитории",
+  "pro": "Технический материал",
+  "tags": ["AI", "LLM"]
+}}
+
+ОГРАНИЧЕНИЯ:
+
+- Только JSON.
+- Никакого Markdown.
+- Не используй блоки ```json.
+- Не добавляй пояснения до или после JSON.
+- Не возвращай несколько JSON-объектов.
+- Все пять обязательных ключей должны присутствовать.
+- Все текстовые значения должны быть строками.
+- tags должен быть массивом строк.
+- Используй двойные кавычки.
+- Не используй завершающие запятые.
+
+Метаданные первоисточника:
+
+{json.dumps(source_item, ensure_ascii=False)}
 """
+
     result = manager.generate(
         messages=[
-            {"role": "system", "content": "You are a careful Russian-language AI Portal editor. Return valid JSON only."},
+            {
+                "role": "system",
+                "content": (
+                    "You are a careful Russian-language AI editor. "
+                    "Return exactly one valid JSON object. "
+                    "Never include text outside the JSON object."
+                ),
+            },
             {"role": "user", "content": prompt},
         ],
         temperature=0.2,
         max_tokens=env_int("AI_MAX_TOKENS", 3500, minimum=1),
         validator=validate_generated_content,
     )
+
     return validate_generated_content(result.text), result
+
 
 
 def load_inbox_items(existing_urls: set[str]) -> tuple[list[dict], set[str]]:
