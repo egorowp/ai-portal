@@ -1,0 +1,15 @@
+{
+  "id": "95a1f88154f4a8ad",
+  "slug": "tokenisation-is-not-in-apx",
+  "title": "Tokenisation is not in APX",
+  "url": "http://arxiv.org/abs/2611.34938v1",
+  "source": "arXiv",
+  "published_at": "2026-11-25T18:59:38Z",
+  "description": "In this paper, we prove that, unless P=NP, no polynomial-time algorithm can find a tokeniser whose objective is within any constant factor of the optimum, meaning that tokenisation is not in the APX complexity class. We prove this for direct and bottom-up tokenisation, under both a compression or unigram log-likelihood objectives, and for binary or larger alphabets. We further show that, even over unary alphabets, direct tokenisation is APX-hard, and thus admits no polynomial-time approximation scheme.",
+  "tags": [
+    "research",
+    "arXiv"
+  ],
+  "status": "review",
+  "created_at": "2026-11-26T09:32:33.829515+00:00"
+}

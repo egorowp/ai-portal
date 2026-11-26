@@ -12,5 +12,8 @@
   ],
   "status": "review",
   "created_at": "2026-11-24T20:38:09.473933+00:00",
-  "generation_error": "Gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  "generation_error": "AIProviderError: All AI providers failed: gemini:APITimeoutError: Request timed out., groq:JSONDecodeError: Extra data: line 8 column 1 (char 2171), openrouter:AIProviderError: Provider returned an empty response",
+  "generation_attempts": 1,
+  "last_attempt_at": "2026-11-26T09:36:48.450897+00:00",
+  "retry_after": "2026-11-26T10:36:48.450926+00:00"
 }

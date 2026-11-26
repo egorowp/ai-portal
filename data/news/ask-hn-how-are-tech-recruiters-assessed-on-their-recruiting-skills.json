@@ -1,0 +1,24 @@
+{
+  "id": "40e46ab957a3f780",
+  "slug": "ask-hn-how-are-tech-recruiters-assessed-on-their-recruiting-skills",
+  "title": "Ask HN: How are tech recruiters assessed on their recruiting skills?",
+  "url": "https://news.ycombinator.com/item?id=50609394",
+  "source": "Hacker News",
+  "published_at": "2026-11-23T09:34:05Z",
+  "description": "I&#x27;ve been working in tech for around 10 years but I have absolutely no experience at all in tech recruiting. However I have had the experience (well, often displeasure) of going through tech recruiters and the tech hiring process when applying for jobs during my career. As with probably many of you, I&#x27;m quite frustrated with how tech hiring has been in the last year or two during the AI&#x2F;LLM era. It&#x27;s incredibly frustrating to send tens to hundreds of CVs for applications you would be an excellent fit for and seeing the roles go to less qualified candidates, or candidates who just end up leaving after a few months or a year. This has left me wondering how tech recruiters are assessed on their recruiting skills and retaining qualified talent within their respective organizations. For those of you who work or have worked in tech recruiting, or have insider knowledge regarding how tech recruiters are assessed, could you share some insight into how tech recruiters are assessed? Is there any kind of follow-up regarding the performance of the people have hired, retention rates, and so on?",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T13:47:29.685770+00:00",
+  "summary": "Вопрос на Hacker News (https://news.ycombinator.com/item?id=50609394) задаёт пользователь, который работает в сфере технологий уже 10 лет, но не имеет опыта в техническом рекрутинге. Он интересуется, как оценивают навыки технических рекрутеров, их способность находить и удерживать квалифицированных специалистов, и существует ли обратная связь по показателям найма, таким как коэффициент удержания сотрудников. В источнике нет ответов или данных о конкретных методах оценки.",
+  "content": {
+    "kids": "Представь, что ты ищешь новых игроков для своей футбольной команды. Тренер (рекрутер) выбирает игроков, а потом смотрит, как они играют и остаются в команде. На форуме Hacker News один человек спросил, как тренеры в сфере технологий проверяют, насколько хорошо они выбирают игроков и как долго те остаются в команде. Пока никто не ответил, поэтому мы не знаем точных правил оценки.",
+    "general": "Пользователь Hacker News задаёт вопрос о том, какие метрики и процедуры используют компании для оценки работы технических рекрутеров: насколько они эффективны в поиске подходящих кандидатов, как измеряется удержание нанятых специалистов и какие отчёты готовятся по этим показателям. В опубликованном посте нет ответов, поэтому конкретных практик оценки мы не можем подтвердить.",
+    "pro": "Запрос из обсуждения Hacker News (ID 50609394) интересуется методологиями оценки эффективности технических рекрутеров: KPI, метрики удержания (retention rate), обратная связь по качеству найма, сроки закрытия вакансий и т.д. В текущем материале отсутствуют ответы или ссылки на внутренние процессы компаний, поэтому любые детали о конкретных системах оценки (например, OKR, scorecards, NPS для кандидатов) остаются неподтверждёнными и не могут быть включены без риска спекуляций."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-26T09:37:54.447870+00:00"
+}

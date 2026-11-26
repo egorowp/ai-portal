@@ -1,0 +1,32 @@
+{
+  "id": "400d8f62d5a0deef",
+  "slug": "codewithsempai-nexora",
+  "title": "Codewithsempai/Nexora",
+  "url": "https://github.com/Codewithsempai/Nexora",
+  "source": "GitHub",
+  "published_at": "2026-11-25T19:19:13Z",
+  "description": "NEXORA — Next-Generation Experience, eXecution, Orchestration, Reasoning & Artificial Intelligence. A next-generation AI desktop assistant featuring Gemini Live voice interaction, offline wake-word detection, intelligent automation, a holographic orb and robot interface, persistent memory, and secure desktop control.",
+  "tags": [
+    "open-source",
+    "AI-assistant",
+    "desktop-automation",
+    "voice-interface",
+    "Gemini-Live",
+    "offline-wake-word",
+    "persistent-memory",
+    "holographic-UI",
+    "GitHub",
+    "early-stage"
+  ],
+  "status": "review",
+  "created_at": "2026-11-25T19:22:36.565060+00:00",
+  "summary": "Nexora — открытый проект AI-ассистента для рабочего стола от Codewithsempai. Объявляемые возможности: голосовое взаимодействие через Gemini Live, офлайн-детекция ключевого слова, интеллектуальная автоматизация, интерфейс в виде голографического шара и робота, постоянная память и безопасное управление десктопом. Проект опубликован на GitHub 25 ноября 2026 года, статус — на рассмотрении. Подробностей о лицензии, архитектуре, требованиях к железу и стабильности в метаданных нет.",
+  "content": {
+    "kids": "Представь, что у тебя на компьютере живёт дружелюбный робот-помощник по имени Нексора. Ты можешь с ним разговаривать голосом — он слышит тебя даже без интернета, когда ты говоришь «эй, Нексора». Он помнит твои разговоры, умеет открывать программы, искать файлы и даже управлять мышкой и клавиатурой, но только если ты разрешишь. У него крутой вид — как светящийся шар или маленький робот на экране. Это открытый проект: любой программист может посмотреть, как он работает, и помочь сделать его лучше. Но пока это эксперимент: могут быть ошибки, и не все функции работают идеально.",
+    "general": "Nexora — это опенсорсный AI-ассистент для десктопа, который пытается объединить голосовое управление (на базе Gemini Live), локальную обработку команд, долговременную память и визуальный интерфейс-аватар. Главная идея — дать пользователю полноценного «второго пилота» за компьютером, который понимает контекст, выполняет рутину и не требует постоянного облачного подключения для базовых функций (wake-word). Практическая ценность: потенциальная альтернатива проприетарным ассистентам с большим контролем приватности и возможностью кастомизации. Ограничения: проект на ранней стадии (статус review), нет данных о совместимости с ОС, производительности, качестве распознавания речи на русском, модели угроз при делегировании управления десктопом. Рекомендуется ждать релизов и аудит кода перед использованием на основной машине.",
+    "pro": "Факты из метаданных: репозиторий Codewithsempai/Nexora на GitHub, опубликован 2026-11-25. Заявленный стек фич: Gemini Live (voice), offline wake-word detection, persistent memory, desktop control (secure), holographic orb/robot UI, intelligent automation. Архитектура не раскрыта: неизвестно, какой фреймворк для wake-word (Porcupine? openWakeWord? свой?), как реализована память (векторная БД? SQLite + embeddings?), какой протокол desktop control (Accessibility API? uinput? собственные биндинги?), как изолирован LLM от привилегий ОС. Лицензия не указана. Зависимости, CI/CD, тесты — нет данных. Предположения/риски: «secure desktop control» требует детального threat modeling; Gemini Live — облачный сервис, офлайн-режим вероятно только для wake-word; persistent memory подразумевает хранение PII — нужны шифрование и политика ретенции. Требуется: README с архитектурой, threat model, инструкции по сборке, бенчмарки latency/accuracy, поддержка Wayland/X11, мультиязычность."
+  },
+  "ai_provider": "openrouter",
+  "ai_model": "openrouter/free",
+  "generated_at": "2026-11-26T09:37:48.714233+00:00"
+}
