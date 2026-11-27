@@ -1,0 +1,27 @@
+{
+  "id": "442791943ea0bb14",
+  "slug": "towerbridge-bridging-the-dual-encoder-modality-gap-via-weight-space-pr",
+  "title": "TowerBridge: Bridging the Dual-Encoder Modality Gap via Weight-Space Programming",
+  "url": "http://arxiv.org/abs/2611.31233v1",
+  "source": "arXiv",
+  "published_at": "2026-11-23T18:59:13Z",
+  "description": "CLIP-style dual encoders map images and text through two separate towers into a shared embedding space, where the two modalities occupy distinct regions separated by a modality gap. Retrieval fails when wrong matches, or hard negatives, outrank the correct one, and the gap is the usual suspect. Yet removing it post hoc degrades retrieval on every CLIP checkpoint we test. We introduce a paired statistic that identifies directions where the two towers agree more on hard negatives than on matched pairs. Mildly attenuating these directions improves retrieval while largely preserving the gap. We arrive at this correction through weight-space programming: guided by the statistic, an LLM agent inspects both towers and writes closed-form weight edits without backpropagation. Free to edit any component, the agent improves COCO test retrieval on all 13 CLIP checkpoints and edits an output projection in 12 of the 13. We distill and refine its recurring correction into TowerBridge, a closed-form recipe motivated by a first-order analysis of the hard-negative margin. Computed in seconds from 25,000 labelled pairs, it requires no model-specific tuning and leaves the architecture and inference co",
+  "tags": [
+    "AI",
+    "CLIP",
+    "dual-encoder",
+    "weight-space programming",
+    "retrieval"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:54:14.337500+00:00",
+  "summary": "В статье «TowerBridge» предложен метод уменьшения разрыва между изображениями и текстом в двойных энкодерах типа CLIP без потери качества поиска. С помощью статистики, выявляющей направления, где модели хуже различают правильные пары и «жёсткие» негативы, LLM‑агент вносит закрытые правки в веса моделей, улучшая результаты поиска на всех проверенных версиях CLIP.",
+  "content": {
+    "kids": "Представь, что у тебя есть два ящика: один хранит картинки, другой – слова. Они должны работать вместе, но иногда они «говорят» разными языками и не могут правильно находить друг друга. Учёные придумали способ, как «переписать» правила в этих ящиках, чтобы они лучше понимали друг друга, и теперь картинки и слова находят правильные пары быстрее.",
+    "general": "Двойные энкодеры, такие как CLIP, преобразуют изображения и текст в общий векторный пространство, однако между их представлениями часто существует «модальный разрыв», из‑за которого поиск может ошибаться, особенно при наличии сложных негативных примеров. Авторы вводят парную статистику, позволяющую обнаружить направления, где модели согласуются больше с ошибочными парами, чем с правильными. На основе этой статистики LLM‑агент генерирует закрытые правки весов без обратного распространения ошибки, что улучшает точность поиска на всех 13 проверенных контрольных точек CLIP, сохраняя большую часть исходного разрыва. Метод требует лишь 25 000 размеченных пар и не нуждается в дополнительной настройке под конкретную модель.",
+    "pro": "The paper addresses the modality gap in CLIP‑style dual encoders by introducing a paired statistic that highlights weight directions where hard negatives receive higher agreement between the image and text towers than matched pairs. Using weight‑space programming, an LLM‑driven agent inspects both towers and produces closed‑form weight edits (no back‑propagation) that mildly attenuate these directions. Empirically, the approach improves COCO test retrieval across all 13 CLIP checkpoints, editing the output projection in 12 of them. The distilled recipe, named TowerBridge, is derived from a first‑order analysis of the hard‑negative margin, can be computed in seconds from 25 k labeled pairs, requires no model‑specific hyper‑parameter tuning, and leaves the architecture and inference unchanged. Confirmed facts: the paired statistic, LLM‑generated weight edits, improvement on all tested checkpoints, computation time, dataset size, and lack of tuning. No speculative claims are made beyond the reported experiments."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-27T15:06:13.926456+00:00"
+}

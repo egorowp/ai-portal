@@ -1,0 +1,15 @@
+{
+  "id": "bc196442169dff4d",
+  "slug": "show-hn-no-equipment-workout-generator-with-3d-to-2d-svg-figures",
+  "title": "Show HN: No-equipment workout generator with 3D-to-2D SVG figures",
+  "url": "https://hiitbuilder.app/",
+  "source": "Hacker News",
+  "published_at": "2026-11-27T13:09:12Z",
+  "description": "Hey HN, I built* HIIT Builder ( https:&#x2F;&#x2F;hiitbuilder.app ) because I don&#x27;t want to get fat. Truly I could just stop there. But for more context, I got tired of hunting for YouTube workout videos that have both good routines and decent music. Turns out most YT workout creators, even the massive ones who could afford a license, have terrible music. So, fk it, I&#x27;ll build my own workout generator and play my own Spotify playlists instead. So far workouts have been completed across 13 countries (US, Iraq, Bangladesh, Austria, France, Germany, Brazil, Ukraine, Turkey, Netherlands, Spain, Chile, Australia), and someone in the Faroe Islands, either physically or maybe just their VPN, started one too. A few technical details that might be interesting to my fellow nerds here: After a few ugly first prototypes for the stick figures, I ended up using the strategy of modeling every animation as a compact 34-number pose vector (joint angles, abduction, etc.) like a 3D skeleton, then projecting it to a 2D SVG. That way any move can be rendered at any angle without having to re-do any major work. For workout order, instead of pure random shuffles the routine builder runs simulat",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-27T15:06:03.832767+00:00"
+}
