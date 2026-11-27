@@ -84,6 +84,13 @@ class AIProviderManager:
         self.timeout = self._float_env("AI_TIMEOUT_SECONDS", 90.0, minimum=1.0)
         self.retry_base = self._float_env("AI_RETRY_BASE_SECONDS", 2.0, minimum=0.0)
         self.max_retry_delay = self._float_env("AI_MAX_RETRY_DELAY_SECONDS", 30.0, minimum=0.0)
+        
+        self.circuit_breaker_threshold = self._int_env(
+            "AI_CIRCUIT_BREAKER_THRESHOLD", 2, minimum=1
+        )
+        self.disabled_providers: set[str] = set()
+        self.transient_failures: dict[str, int] = {}
+
         self.success_count = 0
         self.request_counts: dict[str, int] = {}
         self.clients: dict[str, OpenAI] = {}
@@ -179,7 +186,10 @@ class AIProviderManager:
         return self.clients[provider.name]
 
     def _can_use(self, provider: ProviderConfig) -> bool:
-        return self.request_counts.get(provider.name, 0) < provider.max_requests
+        return (
+            provider.name not in self.disabled_providers
+            and self.request_counts.get(provider.name, 0) < provider.max_requests
+        )
 
     @staticmethod
     def _is_retryable(error: Exception) -> bool:
@@ -246,15 +256,60 @@ class AIProviderManager:
                     temperature=temperature,
                     max_tokens=max_tokens,
                 )
+
+                # Successful HTTP response: transport-level failure streak is reset.
+                self.transient_failures[provider.name] = 0
+                
                 choices = getattr(response, "choices", None) or []
-                content = choices[0].message.content if choices else None
+                choice = choices[0] if choices else None
+                message = getattr(choice, "message", None)
+                
+                content = getattr(message, "content", None)
+                
                 if not isinstance(content, str) or not content.strip():
-                    raise AIProviderError("Provider returned an empty response")
+                    tool_calls = getattr(message, "tool_calls", None) or []
+                    refusal = getattr(message, "refusal", None)
+                    finish_reason = getattr(choice, "finish_reason", None)
+                
+                    logger.warning(
+                        "Empty AI response provider=%s model=%s response_id=%s "
+                        "finish_reason=%s refusal_present=%s tool_calls=%d",
+                        provider.name,
+                        provider.model,
+                        getattr(response, "id", None),
+                        finish_reason,
+                        bool(refusal),
+                        len(tool_calls),
+                    )
+                
+                    raise AIProviderError(
+                        f"Provider returned empty response "
+                        f"(finish_reason={finish_reason}, "
+                        f"refusal={bool(refusal)}, tool_calls={len(tool_calls)})"
+                    )
+
                 if validator is not None:
                     validator(content)
                 return GenerationResult(content, provider.name, provider.model)
             except Exception as error:
                 retryable = self._is_retryable(error)
+                
+                if retryable:
+                    failures = self.transient_failures.get(provider.name, 0) + 1
+                    self.transient_failures[provider.name] = failures
+                
+                    if failures >= self.circuit_breaker_threshold:
+                        self.disabled_providers.add(provider.name)
+                
+                        logger.error(
+                            "Circuit breaker OPEN: provider=%s "
+                            "disabled for the rest of this run after %d "
+                            "consecutive transient failures",
+                            provider.name,
+                            failures,
+                        )
+                        raise
+
                 logger.warning(
                     "AI request failed provider=%s error_type=%s retryable=%s error=%s",
                     provider.name,
