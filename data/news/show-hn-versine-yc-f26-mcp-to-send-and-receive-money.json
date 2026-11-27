@@ -1,0 +1,27 @@
+{
+  "id": "3f2729ef39335d11",
+  "slug": "show-hn-versine-yc-f26-mcp-to-send-and-receive-money",
+  "title": "Show HN: Versine (YC F26) – MCP to send and receive money",
+  "url": "https://news.ycombinator.com/item?id=50634292",
+  "source": "Hacker News",
+  "published_at": "2026-11-24T20:33:12Z",
+  "description": "Hey HN, we’re Harshith, Param, and Vishnu and we&#x27;re building Versine ( https:&#x2F;&#x2F;versine.com ). Versine lets you send and request money just by talking or texting with your AI (think Venmo with an MCP). We’re software engineers who have worked on distributed systems at Stripe, Databricks, and Amazon. Versine is an MCP that sits in front of a wallet with a balance. With it, your agent can do things like: - Send money to someone with your approval (via passkey in our app) - Send and request money to&#x2F;from up to 100 people at once - Send money to people without a Versine account (they cash out to their bank in 2 mins) - Pay people without your explicit approval to trusted contacts (you can set this) Here’s a demo: https:&#x2F;&#x2F;youtube.com&#x2F;shorts&#x2F;Q9X7zioEqi0 We started this because assistants are frustratingly hands-off when it comes to finance and money movement. You can have your assistant go through a receipt and map out all the amounts owed taking care of splitting the subtotal, taxes, tips, but at the end of it the assistant hands back work to you when you have to go out and make the Venmo transfer. Our current solution is oriented towards power use",
+  "tags": [
+    "AI",
+    "Hacker News",
+    "FinTech"
+  ],
+  "status": "review",
+  "created_at": "2026-11-24T20:38:09.473933+00:00",
+  "generation_attempts": 1,
+  "last_attempt_at": "2026-11-26T09:36:48.450897+00:00",
+  "summary": "Versine – это платформа MCP, позволяющая отправлять и запрашивать деньги через разговор или текст с ИИ‑ассистентом, поддерживая одновременные операции до 100 получателей и мгновенный вывод средств на банковский счёт.",
+  "content": {
+    "kids": "Представь, что у тебя есть умный помощник, который может платить друзьям, просто поговорив с ним. Ты говоришь «отправь 50 рублей Максу», а помощник проверяет, всё ли правильно, и переводит деньги. Можно сразу платить сразу нескольким друзьям, а если у кого‑то нет аккаунта, деньги быстро приходят на его банковскую карту.",
+    "general": "Versine – это сервис, который интегрирует возможности ИИ‑ассистентов с финансовыми операциями. Пользователь может через голос или чат инициировать перевод, запросить деньги у группы людей, а система автоматически обрабатывает расчёты, включая налоги и чаевые. Приложение использует подтверждение через passkey и позволяет настроить доверенные контакты, которым можно платить без отдельного подтверждения. Это упрощает финансовые взаимодействия, делая их более естественными и быстрыми, особенно для продвинутых пользователей, которым нужны массовые переводы и быстрый вывод средств.",
+    "pro": "Versine реализована как Money Conversation Platform (MCP), работающая в качестве промежуточного слоя между ИИ‑агентом и цифровым кошельком. Технически сервис:\n- Принимает команды от LLM‑ассистентов через голосовой или текстовый интерфейс;\n- Требует подтверждения операции через passkey, хранящийся в мобильном приложении;\n- Поддерживает батч‑операции до 100 получателей, формируя единую транзакцию;\n- Позволяет отправлять средства получателям без аккаунта Versine, автоматически инициируя банковский вывод (≈2 минуты);\n- Позволяет задавать список доверенных контактов, для которых возможна автоматическая авторизация без отдельного подтверждения;\n- Интегрируется с существующими платёжными шлюзами, используя инфраструктуру, аналогичную Stripe, Databricks и Amazon, где работают основатели.\nТекущая версия ориентирована на power‑users, требующих гибкой автоматизации финансовых задач, таких как распределение расходов по чековым листам, расчёт налогов и чаевых. Дальнейшие планы и масштабирование не уточняются в доступных данных."
+  },
+  "ai_provider": "groq",
+  "ai_model": "openai/gpt-oss-120b",
+  "generated_at": "2026-11-27T09:00:04.647118+00:00"
+}

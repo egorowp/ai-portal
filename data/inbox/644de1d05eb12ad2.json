@@ -1,0 +1,15 @@
+{
+  "id": "644de1d05eb12ad2",
+  "slug": "show-hn-graphvein-trace-calls-to-handlers-and-tables-across-repos-no-l",
+  "title": "Show HN: Graphvein – Trace calls to handlers and tables across repos, no LLM",
+  "url": "https://github.com/graphvein/graphvein/",
+  "source": "Hacker News",
+  "published_at": "2026-11-26T16:36:38Z",
+  "description": "As I started developing more projects using AI assistance over this year, I started facing the problem that most people have voiced against using AI - the overall architecture&#x2F;design of the project becomes known only to the agent, and you lose control of the project. I thought what if we could map the architecture, calls, routes, table schemas etc. from the code - that is how this project was born in October. Now I searched a little bit and came upon a few different projects, but none of them did what I wanted to do - at least in full. And quite a few of them used LLMs themselves to do that - which could be plausibly wrong (hallucinated) and non deterministic. Therefore I have built this over the last 2 months to create a base which: 1. Extracts routes, table schema, request and response bodies across HTTP requests, Tauri calls etc. 2. Gives you an overview of the architecture which you can dive into including how each handler is linked to routes or tables - it works in both directions in a fan out mode from any layer 3. Gives you an overview of the table schema extracted from the project and how they link together 4. An OpenAPI spec extracted from the project, with a try-it m",
+  "tags": [
+    "AI",
+    "Hacker News"
+  ],
+  "status": "review",
+  "created_at": "2026-11-27T08:56:53.011456+00:00"
+}
